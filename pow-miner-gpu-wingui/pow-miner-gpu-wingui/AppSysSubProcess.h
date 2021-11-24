@@ -15,41 +15,158 @@ public:
 		
 	}
 
-	HANDLE SubSys_StdOut_RD			= NULL;
-	HANDLE SubSys_StdOut_WR			= NULL;
-	HANDLE SubSys_ReadData_Thread	= NULL;
+	std::vector<std::string>	stdoutData;
 
-	std::vector<std::string> data;
+	PROCESS_INFORMATION			processInfo;
+	STARTUPINFOA				startupInfo;
+	SECURITY_ATTRIBUTES			saAttr;
+
+	HANDLE						stdoutReadHandle	= NULL;
+	HANDLE						stdoutWriteHandle	= NULL;
+
+	HANDLE						stdoutReadThread	= NULL;
 		
-	static DWORD __stdcall GetStdOut(void * argh)
+	static DWORD __stdcall stdoutReadThreadProcedure(void * argh)
 	{
-		DWORD dwRead = 0;
-		CHAR chBuf[128];
-		BOOL bSuccess = FALSE;
 
-		AppSysSubProcess *p_AppSysSubProcess = (AppSysSubProcess *) argh;
+		DWORD		bytes_read;
+		char		tBuf[257];
+		char		outbuf[32768];
+		int			outbuf_len = 0;
 
-		HANDLE File = p_AppSysSubProcess->SubSys_StdOut_RD;
+		char *p_nl = "NULL";
 
-		for (;;)
-		{
+		AppSysSubProcess *p_this = NULL;
+		
+		if (argh == NULL)
+			return 1;
 
-			if (dwRead > 0) {
-				p_AppSysSubProcess->data.push_back(std::string(chBuf));
+		p_this = (AppSysSubProcess *) argh;
+
+		for (;;) {
+
+			if (!ReadFile( p_this->stdoutReadHandle, tBuf, 256, &bytes_read, NULL))
+			{
+				
+				if( strlen( outbuf ) > 0 )
+					p_this->stdoutData.push_back(std::string(outbuf));
+				
+				return GetLastError();
 			}
 
-			bSuccess = ReadFile(File, chBuf, 128, &dwRead, NULL);
-			
-			if (!bSuccess)
-				break;
-					
-		}
+			if (bytes_read > 0)
+			{
+				tBuf[bytes_read] = '\0';
+				
+				if ((p_nl = strchr(tBuf, '\n')) != NULL) {
 
+					*p_nl = '\0';
+
+					strcat_s(outbuf, sizeof(outbuf), tBuf);
+
+					p_this->stdoutData.push_back(std::string(outbuf));
+
+					p_nl = p_nl + 1;
+
+					outbuf[0] = '\0';
+
+					strcat_s(outbuf, sizeof(outbuf), p_nl);
+									   					 
+				}
+				else {
+
+					strcat_s(outbuf, sizeof(outbuf), tBuf);
+
+				}
+				
+
+												
+			}
+		}
+		
 		return 0;
+
 	}
 
-	HRESULT Run(std::string command, std::string arguments) {
+	HRESULT Run(std::string command, std::string arguments, bool wait_end_flag) 
+	{
 		
+		char cmdline[256];
+		
+		DWORD exitcode;
+
+		std::string cmdline_in = command + " " + arguments;
+
+		strcpy_s(cmdline, sizeof(cmdline), cmdline_in.c_str());
+
+		memset(&saAttr, 0, sizeof(saAttr));
+		saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
+		saAttr.bInheritHandle = TRUE;
+		saAttr.lpSecurityDescriptor = NULL;
+
+		// Create a pipe for the child process's STDOUT. 
+		if (!CreatePipe(&stdoutReadHandle, &stdoutWriteHandle, &saAttr, 5000))
+		{
+			return HRESULT_FROM_WIN32(GetLastError());
+		}
+
+		// Ensure the read handle to the pipe for STDOUT is not inherited.
+		if (!SetHandleInformation(stdoutReadHandle, HANDLE_FLAG_INHERIT, 0))
+		{
+			return HRESULT_FROM_WIN32(GetLastError());
+		}
+
+		memset(&startupInfo, 0, sizeof(startupInfo));
+		startupInfo.cb = sizeof(startupInfo);
+		startupInfo.hStdError = stdoutWriteHandle;
+		startupInfo.hStdOutput = stdoutWriteHandle;
+		startupInfo.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+		startupInfo.dwFlags |= STARTF_USESTDHANDLES;
+
+		// memset(&processInfo, 0, sizeof(processInfo));  // Not actually necessary
+	
+		if (!CreateProcessA(NULL, cmdline, NULL, NULL, TRUE,
+			CREATE_NO_WINDOW | CREATE_UNICODE_ENVIRONMENT, NULL, 0, &startupInfo, &processInfo))
+		{
+			return HRESULT_FROM_WIN32(GetLastError());
+		}
+
+		CloseHandle(stdoutWriteHandle);
+
+		// Create thread for grabbing stdout of child process
+		stdoutReadThread = CreateThread(0, 0, AppSysSubProcess::stdoutReadThreadProcedure, (void *)this, 0, NULL);
+		
+		if (wait_end_flag) {
+
+			WaitForSingleObject(stdoutReadThread, INFINITE);
+
+
+			if (WaitForSingleObject(processInfo.hProcess, INFINITE) != WAIT_OBJECT_0)
+			{
+				return HRESULT_FROM_WIN32(GetLastError());
+			}
+
+			if (!GetExitCodeProcess(processInfo.hProcess, &exitcode))
+			{
+				return HRESULT_FROM_WIN32(GetLastError());
+			}
+
+			CloseHandle(processInfo.hProcess);
+			CloseHandle(processInfo.hThread);
+
+		}
+
+		
+		return exitcode;
+
+	}
+
+};
+
+/*
+
+	HRESULT Run(std::string command, std::string arguments) {
+
 		STARTUPINFO si;
 		PROCESS_INFORMATION pi;
 		SECURITY_ATTRIBUTES saAttr;
@@ -63,12 +180,10 @@ public:
 			return HRESULT_FROM_WIN32(GetLastError());
 		}
 
-		/*
 		if (!SetHandleInformation(SubSys_StdOut_RD, HANDLE_FLAG_INHERIT, 0)) {
 			return HRESULT_FROM_WIN32(GetLastError());
 		}
-		*/
-			
+
 
 		ZeroMemory(&si, sizeof(si));
 		si.cb = sizeof(si);
@@ -76,12 +191,12 @@ public:
 		si.hStdOutput = SubSys_StdOut_WR;
 		si.dwFlags |= STARTF_USESTDHANDLES;
 		si.dwFlags |= STARTF_USESHOWWINDOW;
-		
+
 		ZeroMemory(&pi, sizeof(pi));
 
 		std::string commandLine = command + " " + arguments;
 
-		// Start the child process. 
+		// Start the child process.
 		if (!CreateProcessA(NULL,           // No module name (use command line)
 			(LPSTR) commandLine.c_str(),	// Command line
 			NULL,                           // Process handle not inheritable
@@ -89,7 +204,7 @@ public:
 			TRUE,                           // Set handle inheritance
 			0,                              // No creation flags
 			NULL,                           // Use parent's environment block
-			NULL,                           // Use parent's starting directory 
+			NULL,                           // Use parent's starting directory
 			(LPSTARTUPINFOA) &si,           // Pointer to STARTUPINFO structure
 			(LPPROCESS_INFORMATION) &pi)	// Pointer to PROCESS_INFORMATION structure
 			)
@@ -98,19 +213,16 @@ public:
 		}
 		else
 		{
-			
-			CloseHandle(SubSys_StdOut_WR);	
+
+			CloseHandle(SubSys_StdOut_WR);
 
 			SubSys_ReadData_Thread = CreateThread(0, 0, AppSysSubProcess::GetStdOut, (void *)this, 0, NULL);
 
 		}
 
 		WaitForSingleObject(SubSys_ReadData_Thread, INFINITE);
-				
+
 		return S_OK;
 	}
 
-
-
-
-};
+	*/

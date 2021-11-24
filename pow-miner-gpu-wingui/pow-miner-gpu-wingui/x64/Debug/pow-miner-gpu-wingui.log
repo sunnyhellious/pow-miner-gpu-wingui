@@ -1,6 +1,4 @@
-﻿  AppSysSubProcess.cpp
-  MainForm.cpp
+﻿  MainForm.cpp
 d:\program files (other)\vs2017\projects\pow-miner-gpu-wingui\pow-miner-gpu-wingui\mainform.cpp(7): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
-  Generating Code...
   AboutForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   pow-miner-gpu-wingui.vcxproj -> D:\Program Files (other)\VS2017\Projects\pow-miner-gpu-wingui\x64\Debug\pow-miner-gpu-wingui.exe
