@@ -50,6 +50,7 @@ namespace powminergpuwingui {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(AboutForm::typeid));
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
@@ -72,6 +73,7 @@ namespace powminergpuwingui {
 			this->ClientSize = System::Drawing::Size(341, 184);
 			this->Controls->Add(this->textBox1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"AboutForm";
 			this->Text = L"AboutForm";
 			this->ResumeLayout(false);

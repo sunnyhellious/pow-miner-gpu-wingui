@@ -137,14 +137,33 @@
   <ItemGroup>
     <ClCompile Include="AboutForm.cpp" />
     <ClCompile Include="AppSysSubProcess.cpp" />
+    <ClCompile Include="DeviceTab.cpp" />
+    <ClCompile Include="FoundsAllForm.cpp" />
     <ClCompile Include="MainForm.cpp" />
+    <ClCompile Include="MapVoid.cpp" />
+    <ClCompile Include="MinerConfig.cpp" />
+    <ClCompile Include="mjson.cpp" />
+    <ClCompile Include="UpdateToolsForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AboutForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="AppSysSubProcess.h" />
+    <ClInclude Include="DeviceTab.h">
+      <FileType>CppControl</FileType>
+    </ClInclude>
+    <ClInclude Include="FoundsAllForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="MainForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MapVoid.h" />
+    <ClInclude Include="MinerConfig.h" />
+    <ClInclude Include="mjson.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="UpdateToolsForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -152,9 +171,21 @@
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DeviceTab.resx">
+      <DependentUpon>DeviceTab.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FoundsAllForm.resx">
+      <DependentUpon>FoundsAllForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UpdateToolsForm.resx">
+      <DependentUpon>UpdateToolsForm.h</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="pow-miner-gpu-wingui.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

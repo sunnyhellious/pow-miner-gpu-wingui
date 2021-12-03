@@ -1,3 +1,0 @@
-﻿  MainForm.cpp
-d:\program files (other)\vs2017\projects\pow-miner-gpu-wingui\pow-miner-gpu-wingui\mainform.cpp(7): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
-  pow-miner-gpu-wingui.vcxproj -> D:\Program Files (other)\VS2017\Projects\pow-miner-gpu-wingui\x64\Release\pow-miner-gpu-wingui.exe
