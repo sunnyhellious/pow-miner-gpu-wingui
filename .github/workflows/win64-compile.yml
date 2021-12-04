@@ -34,6 +34,9 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
       
+    - name: Show contents
+      run: dir pow-miner-gpu-wingui\x64\Release
+      
     - name: Compress
       uses: papeloto/action-zip@v1
       with:
@@ -41,6 +44,9 @@ jobs:
           recursive: false
           dest: artifacts_dir\pow-miner-gpu-wingui-x86-64.zip
           
+    - name: Show contents
+      run: dir pow-miner-gpu-wingui\x64\Release
+      
     - name: Packing binary files to the GITHUB Release Tag
       uses: ncipollo/release-action@v1
       with:
