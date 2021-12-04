@@ -41,12 +41,14 @@ jobs:
     - name: Delete some sh**
       run: FOR %%a IN (".\pow-miner-gpu-wingui\x64\Release\*") DO IF /i NOT "%%~nxa"=="pow-miner-gpu-wingui.exe" DEL "%%a"
       
-    - name: Install zip
-      uses: montudor/action-zip@v1
-      
-    - name: Zip
-      run: zip -qq -r artifacts_dir\pow-miner-gpu-wingui-x86-64.zip pow-miner-gpu-wingui\x64\Release\*
-      working-directory: .\
+    - name: Compress
+      uses: papeloto/action-zip@v1
+      with:
+          files: pow-miner-gpu-wingui.exe config miners tools
+          recursive: false
+          dest: artifacts_dir\pow-miner-gpu-wingui-x86-64.zip
+      env:
+          PROJECT_PATH: .\pow-miner-gpu-wingui\x64\Release\
       
     - name: Packing binary files to the GITHUB Release Tag
       uses: ncipollo/release-action@v1
