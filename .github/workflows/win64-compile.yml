@@ -5,6 +5,10 @@ on:
     tags:
     - '*'
 
+defaults:
+  run:
+    shell: cmd
+
 env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_FILE_PATH: .\pow-miner-gpu-wingui\pow-miner-gpu-wingui.sln
