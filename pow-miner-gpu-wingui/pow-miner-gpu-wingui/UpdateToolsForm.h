@@ -107,7 +107,7 @@ namespace powminergpuwingui {
 				this->UpdateToolsTextBox->AppendText("\tSUCCESS\r\n");
 
 			this->UpdateToolsTextBox->AppendText("2.1. Trying to unzip \"minertools-opencl-windows-x86-64.zip\"\r\n");
-			if (AppSysSubProcess::UnzipToFolder(AppSysSubProcess::ExePath() + "\\tools\\minertools-opencl-windows-x86-64.zip", AppSysSubProcess::ExePath() + "\\tools"))
+			if (AppSysSubProcess::UnzipToFolder(AppSysSubProcess::ExePath() + "\\tools\\minertools-opencl-windows-x86-64.zip", AppSysSubProcess::ExePath() + "\\tools\\minertools"))
 				this->UpdateToolsTextBox->AppendText("\tFAILED\r\n");
 			else
 				this->UpdateToolsTextBox->AppendText("\tSUCCESS\r\n");
@@ -119,7 +119,7 @@ namespace powminergpuwingui {
 				this->UpdateToolsTextBox->AppendText("\tSUCCESS\r\n");
 
 			this->UpdateToolsTextBox->AppendText("3.1. Trying to unzip \"minertools-cuda-windows-x86-64.zip\"\r\n");
-			if (AppSysSubProcess::UnzipToFolder(AppSysSubProcess::ExePath() + "\\tools\\minertools-cuda-windows-x86-64.zip", AppSysSubProcess::ExePath() + "\\tools"))
+			if (AppSysSubProcess::UnzipToFolder(AppSysSubProcess::ExePath() + "\\tools\\minertools-cuda-windows-x86-64.zip", AppSysSubProcess::ExePath() + "\\tools\\minertools"))
 				this->UpdateToolsTextBox->AppendText("\tFAILED\r\n");
 			else
 				this->UpdateToolsTextBox->AppendText("\tSUCCESS\r\n");

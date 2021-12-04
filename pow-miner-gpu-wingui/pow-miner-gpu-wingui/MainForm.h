@@ -27,6 +27,8 @@
 using namespace System;
 using namespace msclr::interop;
 
+void stopall_thread(void);
+
 namespace powminergpuwingui {
 
 	using namespace System;
@@ -90,7 +92,7 @@ namespace powminergpuwingui {
 	private: System::Windows::Forms::Button^  SearchOpenCLDevicesButton;
 	private: System::Windows::Forms::FlowLayoutPanel^  flowLayoutPanel1;
 
-	private: System::Windows::Forms::TabControl^  DevicesTabControl;
+	public: System::Windows::Forms::TabControl^  DevicesTabControl;
 
 	private: System::Windows::Forms::SaveFileDialog^  saveFileDialog1;
 	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
@@ -160,21 +162,21 @@ namespace powminergpuwingui {
 			// importSettingsToolStripMenuItem
 			// 
 			this->importSettingsToolStripMenuItem->Name = L"importSettingsToolStripMenuItem";
-			this->importSettingsToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->importSettingsToolStripMenuItem->Size = System::Drawing::Size(154, 22);
 			this->importSettingsToolStripMenuItem->Text = L"Import settings";
 			this->importSettingsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::importSettingsToolStripMenuItem_Click);
 			// 
 			// exportSettingsToolStripMenuItem
 			// 
 			this->exportSettingsToolStripMenuItem->Name = L"exportSettingsToolStripMenuItem";
-			this->exportSettingsToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->exportSettingsToolStripMenuItem->Size = System::Drawing::Size(154, 22);
 			this->exportSettingsToolStripMenuItem->Text = L"Export settings";
 			this->exportSettingsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::exportSettingsToolStripMenuItem_Click);
 			// 
 			// updateToolsToolStripMenuItem
 			// 
 			this->updateToolsToolStripMenuItem->Name = L"updateToolsToolStripMenuItem";
-			this->updateToolsToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->updateToolsToolStripMenuItem->Size = System::Drawing::Size(154, 22);
 			this->updateToolsToolStripMenuItem->Text = L"Update tools";
 			this->updateToolsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::updateToolsToolStripMenuItem_Click);
 			// 
@@ -182,7 +184,7 @@ namespace powminergpuwingui {
 			// 
 			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
 			this->exitToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Alt | System::Windows::Forms::Keys::F4));
-			this->exitToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(154, 22);
 			this->exitToolStripMenuItem->Text = L"Exit";
 			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ExitCallback);
 			// 
@@ -336,14 +338,14 @@ private: System::Void SearchOpenCLDevicesButton_Click(System::Object^  sender, S
 	
 	AppSysSubProcess AppSysSubProcess_0;
 
-	AppSysSubProcess_0.Run("\"" + AppSysSubProcess::ExePath() + "\\tools\\minertools-opencl-windows-x86-64\\pow-miner-opencl.exe\"", "2>&1", AppSysSubProcess::ExePath(), true);
+	AppSysSubProcess_0.Run("\"" + AppSysSubProcess::ExePath() + "\\tools\\minertools\\pow-miner-opencl.exe\"", "2>&1", AppSysSubProcess::ExePath(), true);
 
 	DevicesListBox->BeginUpdate();
 
 	DevicesListBox->Items->Clear();
 
 	for (int i = 0; i < AppSysSubProcess_0.stdoutData.size(); i++) {
-		
+
 		System::String^ Line = gcnew String(AppSysSubProcess_0.stdoutData.at(i).c_str());
 
 		if (Line->StartsWith("[ OpenCL: platform #"))
@@ -359,7 +361,7 @@ private: System::Void SearchCUDADevicesButton_Click(System::Object^  sender, Sys
 
 	AppSysSubProcess AppSysSubProcess_0;
 
-	AppSysSubProcess_0.Run("\"" + AppSysSubProcess::ExePath() + "\\tools\\minertools-cuda-windows-x86-64\\pow-miner-cuda.exe\"", "2>&1", AppSysSubProcess::ExePath(), true);
+	AppSysSubProcess_0.Run("\"" + AppSysSubProcess::ExePath() + "\\tools\\minertools\\pow-miner-cuda.exe\"", "2>&1", AppSysSubProcess::ExePath(), true);
 
 	DevicesListBox->BeginUpdate();
 
@@ -461,6 +463,29 @@ public: void DeviceTab_LogsTextBoxAddLine(DeviceTab^ DeviceTab, System::String^ 
 		if (dt_line->Contains("FOUND")) {
 			DeviceTab->GetLogsFoundsTextBox()->Text = dt_line;
 			DeviceTab->AppSysSubProcess_0->DataVector.push_back(msclr::interop::marshal_as<std::string>(dt_line));
+		}
+
+		if (dt_line->Contains("average speed:")) {
+			
+			array<wchar_t> ^id = { ':' ,',', '[', ']' };
+			array<String^> ^StringArray_TMP = dt_line->Split(id);
+
+			bool found = false;
+
+			for each(String^ temp in StringArray_TMP) {
+
+				if (found == true) {
+					DeviceTab->GetHashSpeedTextBox()->Text = temp;
+					break;
+				}
+
+				if (temp->Contains("average speed"))
+					found = true;
+				
+					
+
+			}
+				
 		}
 						
 		DeviceTab->GetLogsTextBox()->AppendText(dt_line);		
@@ -673,8 +698,7 @@ private: System::Void StartAllButton_Click(System::Object^  sender, System::Even
 
 }
 
-public: void StopAll() {
-
+public: void StopAll(void) {
 
 	if (!DeviceTabsMap->map_void.empty()) {
 	
@@ -687,11 +711,23 @@ public: void StopAll() {
 		// P_DeviceTab_TMP->GetTabPage()->Show();
 
 		for (std::map<std::string, void *>::iterator it = DeviceTabsMap->map_void.begin(); it != DeviceTabsMap->map_void.end(); it++) {
-
+			
 			GCHandle h = GCHandle::FromIntPtr(IntPtr(it->second));
 			DeviceTab^ P_DeviceTab_TMP = reinterpret_cast<DeviceTab^>(h.Target);
 
+			// DevicesTabControl->SelectedTab = P_DeviceTab_TMP->GetTabPage();
+			// P_DeviceTab_TMP->GetTabPage()->Show();
+
+			// this->Refresh();
+			// this->DevicesTabControl->Refresh();
+			// P_DeviceTab_TMP->Refresh();
+
 			P_DeviceTab_TMP->MinerStop();
+			P_DeviceTab_TMP->TestStop();
+			
+			// this->Refresh();
+			// this->DevicesTabControl->Refresh();
+			// P_DeviceTab_TMP->Refresh();
 
 		}
 

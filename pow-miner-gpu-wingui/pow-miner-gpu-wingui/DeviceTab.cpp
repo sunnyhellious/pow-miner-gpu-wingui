@@ -122,8 +122,8 @@ void DeviceTab::MinerStart(void) {
 
 	std::string wd = AppSysSubProcess::ExePath() + "\\miners\\" + msclr::interop::marshal_as<std::string>(this->DeviceTabPage->Name); // "\"" + + "\""
 
-	std::string cuda_miner_str = "\"" + AppSysSubProcess::ExePath() + "\\tools\\minertools-cuda-windows-x86-64\\tonlib-cuda-cli.exe" + "\"" + vl_str + glc_str + cmd_str;
-	std::string opencl_miner_str = "\"" + AppSysSubProcess::ExePath() + "\\tools\\minertools-opencl-windows-x86-64\\tonlib-opencl-cli.exe" + "\"" + vl_str + glc_str + cmd_str;
+	std::string cuda_miner_str = "\"" + AppSysSubProcess::ExePath() + "\\tools\\minertools\\tonlib-cuda-cli.exe" + "\"" + vl_str + glc_str + cmd_str;
+	std::string opencl_miner_str = "\"" + AppSysSubProcess::ExePath() + "\\tools\\minertools\\tonlib-opencl-cli.exe" + "\"" + vl_str + glc_str + cmd_str;
 
 	if (CreateDirectoryA(wd.c_str(), NULL) || ERROR_ALREADY_EXISTS == GetLastError())
 	{

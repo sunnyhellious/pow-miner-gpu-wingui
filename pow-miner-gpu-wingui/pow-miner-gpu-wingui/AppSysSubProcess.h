@@ -68,7 +68,8 @@ public:
 
 		for (;;) {
 
-			if (!ReadFile( p_this->stdoutReadHandle, tBuf, 256, &bytes_read, NULL))
+
+			if (!ReadFile( p_this->stdoutReadHandle, tBuf, 256, &bytes_read, NULL) )
 			{
 				
 				if( strlen( outbuf ) > 0 )
@@ -162,16 +163,16 @@ public:
 
 	public: HRESULT Run(std::string command, std::string arguments, std::string working_dir, bool wait_flag)
 	{
-		
+
 
 		/*
-		
+
 		#define BUFSIZE 4096
 
 		TCHAR chNewEnv[BUFSIZE];
 		LPTSTR lpszCurrentVariable;
-		
-		// Copy environment strings into an environment block. 
+
+		// Copy environment strings into an environment block.
 
 		lpszCurrentVariable = (LPTSTR)chNewEnv;
 		if (FAILED(StringCchCopy(lpszCurrentVariable, BUFSIZE, TEXT("LANG=en_US"))))
@@ -180,16 +181,16 @@ public:
 			return FALSE;
 		}
 
-		
+
 		lpszCurrentVariable += lstrlen(lpszCurrentVariable) + 1;
 		if (FAILED(StringCchCopy(lpszCurrentVariable, BUFSIZE, TEXT("lang=en"))))
 		{
 			printf("String copy failed\n");
 			return FALSE;
 		}
-		
 
-		// Terminate the block with a NULL byte. 
+
+		// Terminate the block with a NULL byte.
 
 		lpszCurrentVariable += lstrlen(lpszCurrentVariable) + 1;
 		*lpszCurrentVariable = (TCHAR)0;
@@ -200,7 +201,7 @@ public:
 
 		char cmdline[4096];
 
-		this->last_command	 = command;
+		this->last_command = command;
 		this->last_arguments = arguments;
 		this->last_working_dir = working_dir;
 
@@ -227,19 +228,26 @@ public:
 			return HRESULT_FROM_WIN32(GetLastError());
 		}
 
-		memset(&startupInfo, 0, sizeof(startupInfo));
+		// memset(&startupInfo, 0, sizeof(startupInfo));
+
+		ZeroMemory(&startupInfo, sizeof(STARTUPINFOA));
 		startupInfo.cb = sizeof(startupInfo);
 		startupInfo.hStdError = stdoutWriteHandle;
 		startupInfo.hStdOutput = stdoutWriteHandle;
 		startupInfo.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
 		startupInfo.dwFlags |= STARTF_USESTDHANDLES;
 
+		ZeroMemory(&processInfo, sizeof(PROCESS_INFORMATION));
+
+
 		// memset(&processInfo, 0, sizeof(processInfo));  // Not actually necessary
 
 		this->exitcode = 0;
 
-		dwFlags = CREATE_NO_WINDOW | CREATE_UNICODE_ENVIRONMENT;
+		dwFlags = CREATE_UNICODE_ENVIRONMENT | CREATE_NO_WINDOW; // CREATE_NO_WINDOW | CREATE_UNICODE_ENVIRONMENT | DETACHED_PROCESS
 	
+		// AllocConsole();
+
 		if (!CreateProcessA(NULL, cmdline, NULL, NULL, TRUE, dwFlags, NULL, working_dir.c_str(), &startupInfo, &processInfo)) // (LPVOID)chNewEnv
 		{
 			return HRESULT_FROM_WIN32(GetLastError());
@@ -274,8 +282,19 @@ public:
 		this->processFinishCallBack = NULL;
 		this->CallBacksOwnerHandle = NULL;
 
-		TerminateProcess(this->processInfo.hProcess, 0);
+
+		if (!TerminateProcess(this->processInfo.hProcess, 0)) {
+			DWORD err = GetLastError();
+			std::string err_str = "ERR:Stop: code = " + std::to_string(HRESULT_FROM_WIN32(err)) + "\n";
+			OutputDebugStringA(err_str.c_str());
+		}
 		
+		// GenerateConsoleCtrlEvent(CTRL_BREAK_EVENT, this->processInfo.dwProcessId);
+		// GenerateConsoleCtrlEvent(CTRL_C_EVENT, this->processInfo.dwProcessId);
+		// GenerateConsoleCtrlEvent(CTRL_CLOSE_EVENT, this->processInfo.dwProcessId);
+
+		// this->tmp_flag = true;
+
 		WaitForSingleObject(stdoutReadThread, INFINITE);
 				
 		return this->exitcode;
@@ -342,7 +361,7 @@ public:
 
 		zip_file = "\"" + zip_file + "\"";
 		
-		AppSysSubProcess_0.Run("\"" + AppSysSubProcess::ExePath() + "\\tools\\unzip.exe" + "\" -o ", zip_file, destination_folder, true);
+		AppSysSubProcess_0.Run("\"" + AppSysSubProcess::ExePath() + "\\tools\\unzip.exe" + "\" -o -j ", zip_file, destination_folder, true);
 
 		if (AppSysSubProcess_0.exitcode != 0)
 			return 1;

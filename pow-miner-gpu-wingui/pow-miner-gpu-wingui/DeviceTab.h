@@ -90,6 +90,8 @@ namespace powminergpuwingui {
 	private: System::Windows::Forms::Label^  GiverStrategyLabel;
 	private: System::Windows::Forms::ComboBox^  GiverStrategyComboBox;
 	private: System::Windows::Forms::Button^  TestStopButton;
+	private: System::Windows::Forms::GroupBox^  HashSpeedGroupBox;
+	private: System::Windows::Forms::TextBox^  HashSpeedTextBox;
 
 
 	protected:
@@ -147,6 +149,8 @@ namespace powminergpuwingui {
 			this->FoundsGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->FoundsShowAllButton = (gcnew System::Windows::Forms::Button());
 			this->FoundsTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->HashSpeedGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->HashSpeedTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->LogsGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->LogsTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->flowLayoutPanel2->SuspendLayout();
@@ -158,6 +162,7 @@ namespace powminergpuwingui {
 			this->WalletGroupBox->SuspendLayout();
 			this->DeviceControlGroupBox->SuspendLayout();
 			this->FoundsGroupBox->SuspendLayout();
+			this->HashSpeedGroupBox->SuspendLayout();
 			this->LogsGroupBox->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -171,6 +176,7 @@ namespace powminergpuwingui {
 			this->flowLayoutPanel2->Controls->Add(this->WalletGroupBox);
 			this->flowLayoutPanel2->Controls->Add(this->DeviceControlGroupBox);
 			this->flowLayoutPanel2->Controls->Add(this->FoundsGroupBox);
+			this->flowLayoutPanel2->Controls->Add(this->HashSpeedGroupBox);
 			this->flowLayoutPanel2->Controls->Add(this->LogsGroupBox);
 			this->flowLayoutPanel2->Location = System::Drawing::Point(0, 0);
 			this->flowLayoutPanel2->Name = L"flowLayoutPanel2";
@@ -478,7 +484,7 @@ namespace powminergpuwingui {
 			this->FoundsGroupBox->Controls->Add(this->FoundsTextBox);
 			this->FoundsGroupBox->Location = System::Drawing::Point(110, 169);
 			this->FoundsGroupBox->Name = L"FoundsGroupBox";
-			this->FoundsGroupBox->Size = System::Drawing::Size(988, 48);
+			this->FoundsGroupBox->Size = System::Drawing::Size(844, 48);
 			this->FoundsGroupBox->TabIndex = 35;
 			this->FoundsGroupBox->TabStop = false;
 			this->FoundsGroupBox->Text = L"Founds";
@@ -486,7 +492,7 @@ namespace powminergpuwingui {
 			// FoundsShowAllButton
 			// 
 			this->FoundsShowAllButton->BackColor = System::Drawing::Color::Transparent;
-			this->FoundsShowAllButton->Location = System::Drawing::Point(892, 17);
+			this->FoundsShowAllButton->Location = System::Drawing::Point(742, 17);
 			this->FoundsShowAllButton->Name = L"FoundsShowAllButton";
 			this->FoundsShowAllButton->Size = System::Drawing::Size(90, 23);
 			this->FoundsShowAllButton->TabIndex = 17;
@@ -498,8 +504,25 @@ namespace powminergpuwingui {
 			// 
 			this->FoundsTextBox->Location = System::Drawing::Point(6, 19);
 			this->FoundsTextBox->Name = L"FoundsTextBox";
-			this->FoundsTextBox->Size = System::Drawing::Size(880, 20);
+			this->FoundsTextBox->Size = System::Drawing::Size(730, 20);
 			this->FoundsTextBox->TabIndex = 0;
+			// 
+			// HashSpeedGroupBox
+			// 
+			this->HashSpeedGroupBox->Controls->Add(this->HashSpeedTextBox);
+			this->HashSpeedGroupBox->Location = System::Drawing::Point(960, 169);
+			this->HashSpeedGroupBox->Name = L"HashSpeedGroupBox";
+			this->HashSpeedGroupBox->Size = System::Drawing::Size(138, 48);
+			this->HashSpeedGroupBox->TabIndex = 36;
+			this->HashSpeedGroupBox->TabStop = false;
+			this->HashSpeedGroupBox->Text = L"Hash speed";
+			// 
+			// HashSpeedTextBox
+			// 
+			this->HashSpeedTextBox->Location = System::Drawing::Point(6, 19);
+			this->HashSpeedTextBox->Name = L"HashSpeedTextBox";
+			this->HashSpeedTextBox->Size = System::Drawing::Size(126, 20);
+			this->HashSpeedTextBox->TabIndex = 0;
 			// 
 			// LogsGroupBox
 			// 
@@ -544,6 +567,8 @@ namespace powminergpuwingui {
 			this->DeviceControlGroupBox->ResumeLayout(false);
 			this->FoundsGroupBox->ResumeLayout(false);
 			this->FoundsGroupBox->PerformLayout();
+			this->HashSpeedGroupBox->ResumeLayout(false);
+			this->HashSpeedGroupBox->PerformLayout();
 			this->LogsGroupBox->ResumeLayout(false);
 			this->LogsGroupBox->PerformLayout();
 			this->ResumeLayout(false);
@@ -709,6 +734,10 @@ public: TextBox^ GetLogsFoundsTextBox(void) {
 	return this->FoundsTextBox;
 }
 
+public: TextBox^ GetHashSpeedTextBox(void) {
+	return this->HashSpeedTextBox;
+}
+
 private: void UpdateTabPage_Name(void) {
 
 	if (this->DeviceTabPage != nullptr) {
@@ -745,7 +774,7 @@ public: void MinerStop(void) {
 
 }
 
-private: System::Void MinerStopButton_Click(System::Object^  sender, System::EventArgs^  e) {
+public: System::Void MinerStopButton_Click(System::Object^  sender, System::EventArgs^  e) {
 
 	MinerStop();
 		
@@ -813,8 +842,8 @@ private: System::Void TestStartButton_Click(System::Object^  sender, System::Eve
 	this->TestStartButton->Enabled = false;
 	this->TestStopButton->Enabled = true;	
 
-	std::string test_cuda_cmd = "\"" + AppSysSubProcess::ExePath() + "\\tools\\minertools-cuda-windows-x86-64\\pow-miner-cuda.exe \" -vv -B -g " + msclr::interop::marshal_as<std::string>(this->DevDidTextBox->Text) + " -t 10 kQBWkNKqzCAwA9vjMwRmg7aY75Rf8lByPA9zKXoqGkHi8SM7 229760179690128740373110445116482216837 5391989333430127958933403017403926134727428884508114496220722049840 10000000000 ";
-	std::string test_opencl_cmd = "\"" + AppSysSubProcess::ExePath() + "\\tools\\minertools-opencl-windows-x86-64\\pow-miner-opencl.exe \" -vv -B -g " + msclr::interop::marshal_as<std::string>(this->DevDidTextBox->Text) + " -p " + msclr::interop::marshal_as<std::string>(this->DevPidTextBox->Text) + " -t 10 kQBWkNKqzCAwA9vjMwRmg7aY75Rf8lByPA9zKXoqGkHi8SM7 229760179690128740373110445116482216837 5391989333430127958933403017403926134727428884508114496220722049840 10000000000 ";
+	std::string test_cuda_cmd = "\"" + AppSysSubProcess::ExePath() + "\\tools\\minertools\\pow-miner-cuda.exe \" -vv -B -g " + msclr::interop::marshal_as<std::string>(this->DevDidTextBox->Text) + " -t 10 kQBWkNKqzCAwA9vjMwRmg7aY75Rf8lByPA9zKXoqGkHi8SM7 229760179690128740373110445116482216837 5391989333430127958933403017403926134727428884508114496220722049840 10000000000 ";
+	std::string test_opencl_cmd = "\"" + AppSysSubProcess::ExePath() + "\\tools\\minertools\\pow-miner-opencl.exe \" -vv -B -g " + msclr::interop::marshal_as<std::string>(this->DevDidTextBox->Text) + " -p " + msclr::interop::marshal_as<std::string>(this->DevPidTextBox->Text) + " -t 10 kQBWkNKqzCAwA9vjMwRmg7aY75Rf8lByPA9zKXoqGkHi8SM7 229760179690128740373110445116482216837 5391989333430127958933403017403926134727428884508114496220722049840 10000000000 ";
 
 	AppSysSubProcess_1->CallBacksOwnerHandle = (void *)GCHandle::ToIntPtr(GCHandle::Alloc(this)); // .ToPointer();
 	AppSysSubProcess_1->stdoutNLCallBack = DeviceTab_MinerProc_stdoutNLCallBack_1;
@@ -846,7 +875,8 @@ private: System::Void TestStartButton_Click(System::Object^  sender, System::Eve
 		AppSysSubProcess_1->Run(test_opencl_cmd, "", wd, false); // 2>&1
 	
 }
-private: System::Void TestStopButton_Click(System::Object^  sender, System::EventArgs^  e) {
+		 
+public: void TestStop(void) {
 
 	AppSysSubProcess_1->Stop();
 
@@ -855,7 +885,7 @@ private: System::Void TestStopButton_Click(System::Object^  sender, System::Even
 	this->MinerExecCtrlGroupBox->Enabled = true;
 	this->GiverGroupBox->Enabled = true;
 	this->WalletGroupBox->Enabled = true;
-	
+
 	this->BoostFactorTextBox->Enabled = true;
 
 	this->LogsSettingsGroupBox->Enabled = true;
@@ -864,6 +894,12 @@ private: System::Void TestStopButton_Click(System::Object^  sender, System::Even
 
 	this->TestStartButton->Enabled = true;
 	this->TestStopButton->Enabled = false;
+
+}
+
+private: System::Void TestStopButton_Click(System::Object^  sender, System::EventArgs^  e) {
+
+	TestStop();
 
 }
 
