@@ -39,7 +39,7 @@ namespace powminergpuwingui {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Сводка для MainForm
+	/// Г‘ГўГ®Г¤ГЄГ  Г¤Г«Гї MainForm
 	/// </summary>
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
@@ -51,8 +51,11 @@ namespace powminergpuwingui {
 		{
 			InitializeComponent();
 			//
-			//TODO: добавьте код конструктора
+			//TODO: Г¤Г®ГЎГ ГўГјГІГҐ ГЄГ®Г¤ ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°Г 
 			MainForm_0 = this;
+			
+			CreateDirectoryA((AppSysSubProcess::ExePath() + "\\config\\autosave_dumps").c_str(), NULL);
+			CreateDirectoryA((AppSysSubProcess::ExePath() + "\\miners").c_str(), NULL);
 
 			DeviceTabsMap = new MapVoid();
 
@@ -67,7 +70,7 @@ namespace powminergpuwingui {
 
 	protected:
 		/// <summary>
-		/// Освободить все используемые ресурсы.
+		/// ГЋГ±ГўГ®ГЎГ®Г¤ГЁГІГј ГўГ±ГҐ ГЁГ±ГЇГ®Г«ГјГ§ГіГҐГ¬Г»ГҐ Г°ГҐГ±ГіГ°Г±Г».
 		/// </summary>
 		~MainForm()
 		{
@@ -102,14 +105,14 @@ namespace powminergpuwingui {
 
 	private:
 		/// <summary>
-		/// Обязательная переменная конструктора.
+		/// ГЋГЎГїГ§Г ГІГҐГ«ГјГ­Г Гї ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г Гї ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°Г .
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Требуемый метод для поддержки конструктора — не изменяйте 
-		/// содержимое этого метода с помощью редактора кода.
+		/// Г’Г°ГҐГЎГіГҐГ¬Г»Г© Г¬ГҐГІГ®Г¤ Г¤Г«Гї ГЇГ®Г¤Г¤ГҐГ°Г¦ГЄГЁ ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°Г  вЂ” Г­ГҐ ГЁГ§Г¬ГҐГ­ГїГ©ГІГҐ 
+		/// Г±Г®Г¤ГҐГ°Г¦ГЁГ¬Г®ГҐ ГЅГІГ®ГЈГ® Г¬ГҐГІГ®Г¤Г  Г± ГЇГ®Г¬Г®Г№ГјГѕ Г°ГҐГ¤Г ГЄГІГ®Г°Г  ГЄГ®Г¤Г .
 		/// </summary>
 		void InitializeComponent(void)
 		{
