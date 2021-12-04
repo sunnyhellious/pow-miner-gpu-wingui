@@ -26,16 +26,16 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Add MSBuild to PATH
-      if: ${{ false }}
+      if: ${{ true }}
       uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Restore NuGet packages
-      if: ${{ false }}
+      if: ${{ true }}
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: nuget restore ${{env.SOLUTION_FILE_PATH}}
 
     - name: Build
-      if: ${{ false }}
+      if: ${{ true }}
       working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
@@ -47,6 +47,7 @@ jobs:
     - name: Zip
       run: |
         cd pow-miner-gpu-wingui\x64\Release\    
+        mkdir miners
         7z a ..\..\..\artifacts_dir\pow-miner-gpu-wingui-x86-64.zip .\
             
     - name: Packing binary files to the GITHUB Release Tag
