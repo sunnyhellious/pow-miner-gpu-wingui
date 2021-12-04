@@ -960,8 +960,8 @@ public: int ExportConfig(MinerConfig^ miner_config) {
 
 	miner_config->auto_restart = this->MinerAutoRstCheckBox->Checked; // 8
 
-	if (sscanf(msclr::interop::marshal_as<std::string>(this->LogsMaxLinesTextBox->Text).c_str(), "%d", &int_tmp) != 1) return 1;
-	miner_config->auto_restart = int_tmp; // 9
+	if (sscanf(msclr::interop::marshal_as<std::string>(this->BoostFactorTextBox->Text).c_str(), "%d", &int_tmp) != 1) return 1;
+	miner_config->boost_factor = int_tmp; // 9
 
 	miner_config->wallet_address = this->WalletAddrTextBox->Text; // 10
 
