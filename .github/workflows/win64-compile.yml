@@ -37,6 +37,9 @@ jobs:
     - name: Show contents
       run: dir pow-miner-gpu-wingui\x64\Release
       
+    - name: Delete some sh**
+      run: FOR %%a IN (".\pow-miner-gpu-wingui\x64\Release\*") DO IF /i NOT "%%~nxa"=="pow-miner-gpu-wingui.exe" DEL "%%a"
+      
     - name: Compress
       uses: papeloto/action-zip@v1
       with:
