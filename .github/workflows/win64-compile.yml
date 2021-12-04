@@ -43,8 +43,8 @@ jobs:
     - name: Compress
       uses: papeloto/action-zip@v1
       with:
-          files: pow-miner-gpu-wingui\x64\Release
-          recursive: false
+          files: pow-miner-gpu-wingui\x64\Release\*
+          recursive: true
           dest: artifacts_dir\pow-miner-gpu-wingui-x86-64.zip
           
     - name: Show contents
