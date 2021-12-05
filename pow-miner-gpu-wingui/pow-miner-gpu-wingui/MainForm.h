@@ -59,7 +59,7 @@ namespace powminergpuwingui {
 
 			AppSysSubProcess AppSysSubProcess_Dl_Config;
 
-			AppSysSubProcess_Dl_Config.Run("\"" + AppSysSubProcess::ExePath() + "\\tools\\wget\\wget.exe\"" + " -N -o global.config.json https://newton-blockchain.github.io/global.config.json", "",
+			AppSysSubProcess_Dl_Config.Run("\"" + AppSysSubProcess::ExePath() + "\\tools\\wget\\wget.exe\"" + " -N https://newton-blockchain.github.io/global.config.json", "",
 				AppSysSubProcess::ExePath() + "\\config", true);
 	
 			DeviceTabsMap = new MapVoid();
