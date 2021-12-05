@@ -39,7 +39,7 @@ namespace powminergpuwingui {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Г‘ГўГ®Г¤ГЄГ  Г¤Г«Гї MainForm
+	/// Сводка для MainForm
 	/// </summary>
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
@@ -51,9 +51,10 @@ namespace powminergpuwingui {
 		{
 			InitializeComponent();
 			//
-			//TODO: Г¤Г®ГЎГ ГўГјГІГҐ ГЄГ®Г¤ ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°Г 
+			//TODO: добавьте код конструктора
+
 			MainForm_0 = this;
-			
+
 			CreateDirectoryA((AppSysSubProcess::ExePath() + "\\config\\autosave_dumps").c_str(), NULL);
 			CreateDirectoryA((AppSysSubProcess::ExePath() + "\\miners").c_str(), NULL);
 
@@ -61,18 +62,21 @@ namespace powminergpuwingui {
 
 			AppSysSubProcess_Dl_Config.Run("\"" + AppSysSubProcess::ExePath() + "\\tools\\wget\\wget.exe\"" + " -N https://newton-blockchain.github.io/global.config.json", "",
 				AppSysSubProcess::ExePath() + "\\config", true);
-	
+
 			DeviceTabsMap = new MapVoid();
 
 			LoadConfig();
 
 			//
 			
+
+			
+
 		}
 
 	protected:
 		/// <summary>
-		/// ГЋГ±ГўГ®ГЎГ®Г¤ГЁГІГј ГўГ±ГҐ ГЁГ±ГЇГ®Г«ГјГ§ГіГҐГ¬Г»ГҐ Г°ГҐГ±ГіГ°Г±Г».
+		/// Освободить все используемые ресурсы.
 		/// </summary>
 		~MainForm()
 		{
@@ -107,14 +111,14 @@ namespace powminergpuwingui {
 
 	private:
 		/// <summary>
-		/// ГЋГЎГїГ§Г ГІГҐГ«ГјГ­Г Гї ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г Гї ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°Г .
+		/// Обязательная переменная конструктора.
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Г’Г°ГҐГЎГіГҐГ¬Г»Г© Г¬ГҐГІГ®Г¤ Г¤Г«Гї ГЇГ®Г¤Г¤ГҐГ°Г¦ГЄГЁ ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°Г  вЂ” Г­ГҐ ГЁГ§Г¬ГҐГ­ГїГ©ГІГҐ 
-		/// Г±Г®Г¤ГҐГ°Г¦ГЁГ¬Г®ГҐ ГЅГІГ®ГЈГ® Г¬ГҐГІГ®Г¤Г  Г± ГЇГ®Г¬Г®Г№ГјГѕ Г°ГҐГ¤Г ГЄГІГ®Г°Г  ГЄГ®Г¤Г .
+		/// Требуемый метод для поддержки конструктора — не изменяйте 
+		/// содержимое этого метода с помощью редактора кода.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -150,7 +154,7 @@ namespace powminergpuwingui {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1292, 24);
+			this->menuStrip1->Size = System::Drawing::Size(1444, 24);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -212,11 +216,11 @@ namespace powminergpuwingui {
 			this->DevicesListBox->Dock = System::Windows::Forms::DockStyle::Top;
 			this->DevicesListBox->FormattingEnabled = true;
 			this->DevicesListBox->HorizontalScrollbar = true;
-			this->DevicesListBox->Location = System::Drawing::Point(3, 61);
-			this->DevicesListBox->MaximumSize = System::Drawing::Size(156, 350);
-			this->DevicesListBox->MinimumSize = System::Drawing::Size(156, 350);
+			this->DevicesListBox->Location = System::Drawing::Point(3, 32);
+			this->DevicesListBox->MaximumSize = System::Drawing::Size(310, 400);
+			this->DevicesListBox->MinimumSize = System::Drawing::Size(310, 400);
 			this->DevicesListBox->Name = L"DevicesListBox";
-			this->DevicesListBox->Size = System::Drawing::Size(156, 342);
+			this->DevicesListBox->Size = System::Drawing::Size(310, 394);
 			this->DevicesListBox->TabIndex = 3;
 			// 
 			// SearchCUDADevicesButton
@@ -224,7 +228,7 @@ namespace powminergpuwingui {
 			this->SearchCUDADevicesButton->Dock = System::Windows::Forms::DockStyle::Top;
 			this->SearchCUDADevicesButton->Location = System::Drawing::Point(3, 3);
 			this->SearchCUDADevicesButton->Name = L"SearchCUDADevicesButton";
-			this->SearchCUDADevicesButton->Size = System::Drawing::Size(156, 23);
+			this->SearchCUDADevicesButton->Size = System::Drawing::Size(152, 23);
 			this->SearchCUDADevicesButton->TabIndex = 1;
 			this->SearchCUDADevicesButton->Text = L"Search CUDA devices";
 			this->SearchCUDADevicesButton->UseVisualStyleBackColor = true;
@@ -233,9 +237,9 @@ namespace powminergpuwingui {
 			// UseDeviceButton
 			// 
 			this->UseDeviceButton->Dock = System::Windows::Forms::DockStyle::Top;
-			this->UseDeviceButton->Location = System::Drawing::Point(3, 417);
+			this->UseDeviceButton->Location = System::Drawing::Point(3, 438);
 			this->UseDeviceButton->Name = L"UseDeviceButton";
-			this->UseDeviceButton->Size = System::Drawing::Size(156, 23);
+			this->UseDeviceButton->Size = System::Drawing::Size(310, 23);
 			this->UseDeviceButton->TabIndex = 4;
 			this->UseDeviceButton->Text = L"Use device";
 			this->UseDeviceButton->UseVisualStyleBackColor = true;
@@ -244,9 +248,9 @@ namespace powminergpuwingui {
 			// SearchOpenCLDevicesButton
 			// 
 			this->SearchOpenCLDevicesButton->Dock = System::Windows::Forms::DockStyle::Top;
-			this->SearchOpenCLDevicesButton->Location = System::Drawing::Point(3, 32);
+			this->SearchOpenCLDevicesButton->Location = System::Drawing::Point(161, 3);
 			this->SearchOpenCLDevicesButton->Name = L"SearchOpenCLDevicesButton";
-			this->SearchOpenCLDevicesButton->Size = System::Drawing::Size(156, 23);
+			this->SearchOpenCLDevicesButton->Size = System::Drawing::Size(152, 23);
 			this->SearchOpenCLDevicesButton->TabIndex = 2;
 			this->SearchOpenCLDevicesButton->Text = L"Search OpenCL devices";
 			this->SearchOpenCLDevicesButton->UseVisualStyleBackColor = true;
@@ -262,14 +266,14 @@ namespace powminergpuwingui {
 			this->flowLayoutPanel1->Controls->Add(this->StopAllButton);
 			this->flowLayoutPanel1->Location = System::Drawing::Point(4, 24);
 			this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
-			this->flowLayoutPanel1->Size = System::Drawing::Size(164, 498);
+			this->flowLayoutPanel1->Size = System::Drawing::Size(316, 498);
 			this->flowLayoutPanel1->TabIndex = 5;
 			// 
 			// StartAllButton
 			// 
-			this->StartAllButton->Location = System::Drawing::Point(3, 446);
+			this->StartAllButton->Location = System::Drawing::Point(3, 467);
 			this->StartAllButton->Name = L"StartAllButton";
-			this->StartAllButton->Size = System::Drawing::Size(156, 23);
+			this->StartAllButton->Size = System::Drawing::Size(152, 23);
 			this->StartAllButton->TabIndex = 5;
 			this->StartAllButton->Text = L"Start all";
 			this->StartAllButton->UseVisualStyleBackColor = true;
@@ -277,9 +281,9 @@ namespace powminergpuwingui {
 			// 
 			// StopAllButton
 			// 
-			this->StopAllButton->Location = System::Drawing::Point(3, 475);
+			this->StopAllButton->Location = System::Drawing::Point(161, 467);
 			this->StopAllButton->Name = L"StopAllButton";
-			this->StopAllButton->Size = System::Drawing::Size(156, 23);
+			this->StopAllButton->Size = System::Drawing::Size(152, 23);
 			this->StopAllButton->TabIndex = 6;
 			this->StopAllButton->Text = L"Stop all";
 			this->StopAllButton->UseVisualStyleBackColor = true;
@@ -287,7 +291,7 @@ namespace powminergpuwingui {
 			// 
 			// DevicesTabControl
 			// 
-			this->DevicesTabControl->Location = System::Drawing::Point(170, 24);
+			this->DevicesTabControl->Location = System::Drawing::Point(323, 24);
 			this->DevicesTabControl->Name = L"DevicesTabControl";
 			this->DevicesTabControl->SelectedIndex = 0;
 			this->DevicesTabControl->Size = System::Drawing::Size(1118, 498);
@@ -303,14 +307,14 @@ namespace powminergpuwingui {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
-			this->ClientSize = System::Drawing::Size(1292, 525);
+			this->ClientSize = System::Drawing::Size(1444, 525);
 			this->Controls->Add(this->flowLayoutPanel1);
 			this->Controls->Add(this->DevicesTabControl);
 			this->Controls->Add(this->menuStrip1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
-			this->MaximumSize = System::Drawing::Size(1308, 564);
-			this->MinimumSize = System::Drawing::Size(1308, 564);
+			this->MaximumSize = System::Drawing::Size(1460, 564);
+			this->MinimumSize = System::Drawing::Size(1460, 564);
 			this->Name = L"MainForm";
 			this->Text = L"pow-miner-gpu-wingui";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
