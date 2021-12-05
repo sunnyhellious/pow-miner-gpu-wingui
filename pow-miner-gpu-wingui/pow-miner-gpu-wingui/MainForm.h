@@ -57,15 +57,17 @@ namespace powminergpuwingui {
 			CreateDirectoryA((AppSysSubProcess::ExePath() + "\\config\\autosave_dumps").c_str(), NULL);
 			CreateDirectoryA((AppSysSubProcess::ExePath() + "\\miners").c_str(), NULL);
 
+			AppSysSubProcess AppSysSubProcess_Dl_Config;
+
+			AppSysSubProcess_Dl_Config.Run("\"" + AppSysSubProcess::ExePath() + "\\tools\\wget\\wget.exe\"" + " -N -o global.config.json https://newton-blockchain.github.io/global.config.json", "",
+				AppSysSubProcess::ExePath() + "\\config", true);
+	
 			DeviceTabsMap = new MapVoid();
 
 			LoadConfig();
 
 			//
 			
-
-			
-
 		}
 
 	protected:
