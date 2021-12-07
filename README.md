@@ -3,8 +3,7 @@
 TON wallet address for donations: <br />
 __EQAvRnuckR42aEE29_WCDCTOwEci1ZKo8a5ul4ncYWaqxA2q__
 
-
-1. Download and extract!
+1. Download and extract __to path with no Cyrillic symbols__!
 2. Execute pow-miner-gpu-wingui.exe
 3. Go to "file->update tools"
 4. It will update "miner-tools-*" and "global.config.json"
