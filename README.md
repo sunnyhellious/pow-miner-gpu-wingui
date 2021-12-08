@@ -5,8 +5,6 @@ __EQAvRnuckR42aEE29_WCDCTOwEci1ZKo8a5ul4ncYWaqxA2q__
 
 Install prerequisites before start:
 1. __Microsoft .NET Framework 4 (offline installator)__ - https://www.microsoft.com/ru-ru/download/details.aspx?id=17718
-2. __Microsoft Visual C++ Visual Studio 2015-2019 Redistributable x64 (offline installator)__ - https://go.microsoft.com/fwlink/?LinkId=746572
-3. __Microsoft Visual C++ Visual Studio 2015-2019 Redistributable x86 (offline installator)__ - https://go.microsoft.com/fwlink/?LinkId=746571
 
 How to use:
 1. Download and extract __to path with no Cyrillic symbols__!
@@ -20,3 +18,7 @@ How to use:
 9. Type "Wallet address"
 10. Press "Start" or "Start all" button
 11. Enjoy!
+
+If you have any problems with DLLs on start try to install:
+1. __Microsoft Visual C++ Visual Studio 2015-2019 Redistributable x64 (offline installator)__ - https://go.microsoft.com/fwlink/?LinkId=746572
+2. __Microsoft Visual C++ Visual Studio 2015-2019 Redistributable x86 (offline installator)__ - https://go.microsoft.com/fwlink/?LinkId=746571
