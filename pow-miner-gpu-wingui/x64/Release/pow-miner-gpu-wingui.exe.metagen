@@ -2,6 +2,7 @@
   powminergpuwingui.DeviceTab.resources - Embedded, ContainedInManifestFile, 
   powminergpuwingui.FoundsAllForm.resources - Embedded, ContainedInManifestFile, 
   powminergpuwingui.MainForm.resources - Embedded, ContainedInManifestFile, 
+  powminergpuwingui.SettingsForm.resources - Embedded, ContainedInManifestFile, 
   powminergpuwingui.UpdateToolsForm.resources - Embedded, ContainedInManifestFile, 
 ImageRuntimeVersion: v4.0.30319
 Assembly pow-miner-gpu-wingui, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
@@ -58,12 +59,21 @@ Class powminergpuwingui.UpdateToolsForm: AutoLayout, AnsiClass, Class, Public, B
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
     Run(): PrivateScope, Public, HideBySig
+Class powminergpuwingui.SettingsForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Boolean NewSettingsApplied : Public
+    Boolean AutoStartMinersFlag : Public
+  Methods:
+    Update(): PrivateScope, Public, HideBySig
 Class powminergpuwingui.MainForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     System.Windows.Forms.TabControl DevicesTabControl : Public
     MapVoid* DeviceTabsMap : Public
+    Boolean sets_startm_ragui : Public
     powminergpuwingui.MainForm MainForm_0 : Public, Static
   Methods:
     DeviceTab_LogsTextBoxAddLine(DeviceTab, String): PrivateScope, Public, HideBySig

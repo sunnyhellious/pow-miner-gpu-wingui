@@ -24,6 +24,10 @@
 
 #include <msclr\marshal.h>
 
+#include "SettingsForm.h"
+
+#include "mjson.h"
+
 using namespace System;
 using namespace msclr::interop;
 
@@ -67,6 +71,12 @@ namespace powminergpuwingui {
 
 			LoadConfig();
 
+			if (this->sets_startm_ragui) {
+				this->StartAll();
+			}
+
+			
+
 			//
 			
 
@@ -107,6 +117,7 @@ namespace powminergpuwingui {
 	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
 	private: System::Windows::Forms::Button^  StartAllButton;
 	private: System::Windows::Forms::Button^  StopAllButton;
+	private: System::Windows::Forms::ToolStripMenuItem^  settingsToolStripMenuItem;
 
 
 	private:
@@ -125,6 +136,7 @@ namespace powminergpuwingui {
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->importSettingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exportSettingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->updateToolsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -160,13 +172,20 @@ namespace powminergpuwingui {
 			// 
 			// fileToolStripMenuItem
 			// 
-			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-				this->importSettingsToolStripMenuItem,
-					this->exportSettingsToolStripMenuItem, this->updateToolsToolStripMenuItem, this->exitToolStripMenuItem
+			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+				this->settingsToolStripMenuItem,
+					this->importSettingsToolStripMenuItem, this->exportSettingsToolStripMenuItem, this->updateToolsToolStripMenuItem, this->exitToolStripMenuItem
 			});
 			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
 			this->fileToolStripMenuItem->Size = System::Drawing::Size(37, 20);
 			this->fileToolStripMenuItem->Text = L"File";
+			// 
+			// settingsToolStripMenuItem
+			// 
+			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
+			this->settingsToolStripMenuItem->Size = System::Drawing::Size(154, 22);
+			this->settingsToolStripMenuItem->Text = L"Settings";
+			this->settingsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::settingsToolStripMenuItem_Click);
 			// 
 			// importSettingsToolStripMenuItem
 			// 
@@ -353,17 +372,36 @@ private: System::Void SearchOpenCLDevicesButton_Click(System::Object^  sender, S
 
 	DevicesListBox->Items->Clear();
 
+	std::string full_str = "";
+
 	for (int i = 0; i < AppSysSubProcess_0.stdoutData.size(); i++) {
 
-		System::String^ Line = gcnew String(AppSysSubProcess_0.stdoutData.at(i).c_str());
+		// System::String^ Line = gcnew String(AppSysSubProcess_0.stdoutData.at(i).c_str());
 
-		if (Line->StartsWith("[ OpenCL: platform #"))
-			DevicesListBox->Items->Add(Line);
+		// if (Line->StartsWith("[ OpenCL: platform #"))
+		//	DevicesListBox->Items->Add(Line);
+
+		full_str += AppSysSubProcess_0.stdoutData.at(i).c_str();
 		
 	}
 
-	DevicesListBox->EndUpdate();
+	System::String^ full_sstr = gcnew String(full_str.c_str());
 
+	array<wchar_t> ^id = { '[', ']' };
+	array<String^> ^StringArray_TMP = full_sstr->Split(id);
+
+	bool found = false;
+
+	for each(String^ temp in StringArray_TMP) {
+
+		if (temp->Contains("OpenCL: platform #"))
+			DevicesListBox->Items->Add("[" + temp + "]");
+		
+	}
+
+
+	DevicesListBox->EndUpdate();
+	   	
 }
 
 private: System::Void SearchCUDADevicesButton_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -376,14 +414,35 @@ private: System::Void SearchCUDADevicesButton_Click(System::Object^  sender, Sys
 
 	DevicesListBox->Items->Clear();
 
-	for (int i = 0; i < AppSysSubProcess_0.stdoutData.size(); i++) {
-				
-		System::String^ Line = gcnew String(AppSysSubProcess_0.stdoutData.at(i).c_str());
+	std::string full_str = "";
 
-		if (Line->StartsWith("[ GPU #"))
-			DevicesListBox->Items->Add(Line);
+	for (int i = 0; i < AppSysSubProcess_0.stdoutData.size(); i++) {
+
+		// System::String^ Line = gcnew String(AppSysSubProcess_0.stdoutData.at(i).c_str());
+
+		// if (Line->StartsWith("[ OpenCL: platform #"))
+		//	DevicesListBox->Items->Add(Line);
+
+		full_str += AppSysSubProcess_0.stdoutData.at(i).c_str();
 
 	}
+
+	// full_str = "[ GPU #1 ][ GPU #2 ]";
+
+	System::String^ full_sstr = gcnew String(full_str.c_str());
+
+	array<wchar_t> ^id = { '[', ']' };
+	array<String^> ^StringArray_TMP = full_sstr->Split(id);
+
+	bool found = false;
+
+	for each(String^ temp in StringArray_TMP) {
+
+		if (temp->Contains("GPU #"))
+			DevicesListBox->Items->Add("[" + temp + "]");
+
+	}
+
 
 	DevicesListBox->EndUpdate();
 
@@ -636,7 +695,7 @@ private: void LoadConfig() {
 
 		MinerConfig_tmp = gcnew MinerConfig();
 
-		for (int i = 0; i < miners_json_strings.size(); i++) {
+		for (int i = 0; i < miners_json_strings.size()-1; i++) {
 
 						
 			if (MinerConfig_tmp->import_json_string(miners_json_strings.at(i)) == 0) {
@@ -666,6 +725,13 @@ private: void LoadConfig() {
 
 
 		}
+
+		char json_chars[4096];
+		double double_tmp;
+		strcpy(json_chars, miners_json_strings.at(miners_json_strings.size() - 1).c_str());
+		if (!mjson_get_number(json_chars, strlen(json_chars), "$.startm_ragui", &double_tmp))
+			return;
+		this->sets_startm_ragui = double_tmp;
 	
 
 	}
@@ -774,6 +840,13 @@ public: void SaveConfig(bool force) {
 
 	}
 
+	char *json_chars = mjson_aprintf("{%Q:%d}",
+		"startm_ragui", this->sets_startm_ragui);
+
+	vect_string.push_back(std::string(json_chars) + "\n");
+
+	free(json_chars);
+
 	vect_string_old = AppSysSubProcess::ReadLinesFromFile(AppSysSubProcess::ExePath() + "\\config\\autosave.config.json");
 
 	if ( (vect_string != vect_string_old) || (force == true) ) {
@@ -819,6 +892,13 @@ public: void SaveConfig_ToFile( std::string filename ) {
 
 	}
 
+	char *json_chars = mjson_aprintf("{%Q:%d}",
+		"startm_ragui", this->sets_startm_ragui );
+
+	vect_string.push_back( std::string(json_chars) + "\n");
+
+	free(json_chars);	
+
 	AppSysSubProcess::WriteLinesToFile(filename, &vect_string);
 
 }
@@ -838,7 +918,7 @@ public: int LoadConfig_FromFile(std::string filename, bool only_test) {
 		if (miners_json_strings.size() <= 0)
 			return 1;
 
-		for (int i = 0; i < miners_json_strings.size(); i++) {
+		for (int i = 0; i < miners_json_strings.size()-1; i++) {
 			
 			if (MinerConfig_tmp->import_json_string(miners_json_strings.at(i)) != 0) {
 
@@ -849,11 +929,18 @@ public: int LoadConfig_FromFile(std::string filename, bool only_test) {
 
 		}
 
+		char json_chars[4096];
+		double double_tmp;
+		strcpy(json_chars, miners_json_strings.at(miners_json_strings.size() - 1).c_str());
+		if (!mjson_get_number(json_chars, strlen(json_chars), "$.startm_ragui", &double_tmp))
+			return 1;
+		// this->sets_startm_ragui = double_tmp;
+
 		if (only_test == true)
 			return 0;
 
 
-		for (int i = 0; i < miners_json_strings.size(); i++) {
+		for (int i = 0; i < miners_json_strings.size()-1; i++) {
 
 			if (MinerConfig_tmp->import_json_string(miners_json_strings.at(i)) == 0) {
 
@@ -885,6 +972,11 @@ public: int LoadConfig_FromFile(std::string filename, bool only_test) {
 
 		}
 
+		strcpy(json_chars, miners_json_strings.at(miners_json_strings.size() - 1).c_str());
+		if (!mjson_get_number(json_chars, strlen(json_chars), "$.startm_ragui", &double_tmp))
+			return 1;
+		this->sets_startm_ragui = double_tmp;
+
 		return 0;
 
 
@@ -896,7 +988,26 @@ public: int LoadConfig_FromFile(std::string filename, bool only_test) {
 
 }
 
+public: bool sets_startm_ragui = 0;
 
+private: System::Void settingsToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+
+	powminergpuwingui::SettingsForm SettingsFormObject;
+
+	if (sets_startm_ragui == true) {
+		SettingsFormObject.AutoStartMinersFlag = true;
+	}
+
+	SettingsFormObject.Update();
+		
+	SettingsFormObject.ShowDialog();
+
+	if (SettingsFormObject.NewSettingsApplied) {
+		this->sets_startm_ragui = SettingsFormObject.AutoStartMinersFlag;
+	}
+
+
+}
 };
 }
 
