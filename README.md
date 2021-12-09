@@ -17,7 +17,8 @@ How to use:
 8. Press "Use device"
 9. Type "Wallet address"
 10. Press "Start" or "Start all" button
-11. Enjoy!
+11. In File->Settings you can also configure AUTO START ALL MINERS after GUI start! It can be very helpfull if your rig reboots sometimes.
+12. Enjoy!
 
 If you have any problems with DLLs on start try to install:
 1. __Microsoft Visual C++ Visual Studio 2015-2019 Redistributable x64 (offline installator)__ - https://go.microsoft.com/fwlink/?LinkId=746572
