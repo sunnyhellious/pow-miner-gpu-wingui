@@ -1,0 +1,83 @@
+  powminergpuwingui.AboutForm.resources - Embedded, ContainedInManifestFile, 
+  powminergpuwingui.DeviceTab.resources - Embedded, ContainedInManifestFile, 
+  powminergpuwingui.FoundsAllForm.resources - Embedded, ContainedInManifestFile, 
+  powminergpuwingui.MainForm.resources - Embedded, ContainedInManifestFile, 
+  powminergpuwingui.UpdateToolsForm.resources - Embedded, ContainedInManifestFile, 
+ImageRuntimeVersion: v4.0.30319
+Assembly pow-miner-gpu-wingui, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class powminergpuwingui.AboutForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class powminergpuwingui.FoundsAllForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    GetFoundsAllTextBox(): PrivateScope, Public, HideBySig
+Class powminergpuwingui.DeviceTab: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.UserControl
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Windows.Forms.TabControl DevicesTabControl_Parent : Public
+    AppSysSubProcess* AppSysSubProcess_0 : Public
+    AppSysSubProcess* AppSysSubProcess_1 : Public
+    powminergpuwingui.DeviceTab LastDeviceTab : Public, Static
+  Methods:
+    GetFlowLayoutPanel(): PrivateScope, Public, HideBySig
+    GetTabPage(): PrivateScope, Public, HideBySig
+    GetDevTypeComboBox(): PrivateScope, Public, HideBySig
+    GetDevPidTextBox(): PrivateScope, Public, HideBySig
+    GetDevDidTextBox(): PrivateScope, Public, HideBySig
+    MinerStart(): PrivateScope, Public, HideBySig
+    MinerRestart(): PrivateScope, Public, HideBySig
+    GetLogsTextBox(): PrivateScope, Public, HideBySig
+    GetMinerAutoRstCheckBox(): PrivateScope, Public, HideBySig
+    GetLogsMaxLinesTextBox(): PrivateScope, Public, HideBySig
+    GetLogsFoundsTextBox(): PrivateScope, Public, HideBySig
+    GetHashSpeedTextBox(): PrivateScope, Public, HideBySig
+    MinerStop(): PrivateScope, Public, HideBySig
+    MinerStopButton_Click(Object, EventArgs): PrivateScope, Public, HideBySig
+    TestStop(): PrivateScope, Public, HideBySig
+    ImportConfig(MinerConfig): PrivateScope, Public, HideBySig
+    ExportConfig(MinerConfig): PrivateScope, Public, HideBySig
+    Delete(): PrivateScope, Public, HideBySig
+Class powminergpuwingui.UpdateToolsForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Run(): PrivateScope, Public, HideBySig
+Class powminergpuwingui.MainForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Windows.Forms.TabControl DevicesTabControl : Public
+    MapVoid* DeviceTabsMap : Public
+    powminergpuwingui.MainForm MainForm_0 : Public, Static
+  Methods:
+    DeviceTab_LogsTextBoxAddLine(DeviceTab, String): PrivateScope, Public, HideBySig
+    MarshalString(basic_string<char\,std::char_traits<char>\,std::allocator<char> >*, String): PrivateScope, Public, HideBySig
+    DeleteAll(): PrivateScope, Public, HideBySig
+    StartAll(): PrivateScope, Public, HideBySig
+    StopAll(): PrivateScope, Public, HideBySig
+    SaveConfig(Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig
+    SaveConfig_ToFile(basic_string<char\,std::char_traits<char>\,std::allocator<char> >*): PrivateScope, Public, HideBySig
+    LoadConfig_FromFile(basic_string<char\,std::char_traits<char>\,std::allocator<char> >*, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig
+Class powminergpuwingui.MainForm+DeviceTab_LogsTextBoxAddLine_Delagate: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(DeviceTab, String): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(DeviceTab, String, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask

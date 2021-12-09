@@ -40,6 +40,8 @@ namespace powminergpuwingui {
 			}
 		}
 	private: System::Windows::Forms::TextBox^  UpdateToolsTextBox;
+	private: System::Windows::Forms::Button^  UpdOkButton;
+
 	protected:
 
 	private:
@@ -57,6 +59,7 @@ namespace powminergpuwingui {
 		{
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(UpdateToolsForm::typeid));
 			this->UpdateToolsTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->UpdOkButton = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// UpdateToolsTextBox
@@ -66,18 +69,30 @@ namespace powminergpuwingui {
 			this->UpdateToolsTextBox->Name = L"UpdateToolsTextBox";
 			this->UpdateToolsTextBox->ReadOnly = true;
 			this->UpdateToolsTextBox->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->UpdateToolsTextBox->Size = System::Drawing::Size(626, 237);
+			this->UpdateToolsTextBox->Size = System::Drawing::Size(626, 211);
 			this->UpdateToolsTextBox->TabIndex = 34;
+			// 
+			// UpdOkButton
+			// 
+			this->UpdOkButton->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"UpdOkButton.BackgroundImage")));
+			this->UpdOkButton->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+			this->UpdOkButton->Location = System::Drawing::Point(12, 230);
+			this->UpdOkButton->Name = L"UpdOkButton";
+			this->UpdOkButton->Size = System::Drawing::Size(50, 50);
+			this->UpdOkButton->TabIndex = 35;
+			this->UpdOkButton->UseVisualStyleBackColor = true;
+			this->UpdOkButton->Click += gcnew System::EventHandler(this, &UpdateToolsForm::UpdOkButton_Click);
 			// 
 			// UpdateToolsForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(650, 261);
+			this->ClientSize = System::Drawing::Size(650, 286);
+			this->Controls->Add(this->UpdOkButton);
 			this->Controls->Add(this->UpdateToolsTextBox);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->MaximumSize = System::Drawing::Size(666, 300);
-			this->MinimumSize = System::Drawing::Size(666, 300);
+			this->MaximumSize = System::Drawing::Size(666, 325);
+			this->MinimumSize = System::Drawing::Size(666, 325);
 			this->Name = L"UpdateToolsForm";
 			this->Text = L"Update tools";
 			this->Load += gcnew System::EventHandler(this, &UpdateToolsForm::UpdateToolsForm_Load);
@@ -133,5 +148,8 @@ namespace powminergpuwingui {
 		this->Run();
 	
 	}
+private: System::Void UpdOkButton_Click(System::Object^  sender, System::EventArgs^  e) {
+	this->Close();
+}
 };
 }
