@@ -83,7 +83,7 @@ namespace powminergpuwingui {
 	private: System::Windows::Forms::GroupBox^  FoundsGroupBox;
 	private: System::Windows::Forms::Button^  FoundsShowAllButton;
 	private: System::Windows::Forms::TextBox^  FoundsTextBox;
-	private: System::Windows::Forms::GroupBox^  LogsGroupBox;
+
 	private: System::Windows::Forms::TextBox^  LogsTextBox;
 	private: System::Windows::Forms::Label^  LogsVerbosityLabel;
 	private: System::Windows::Forms::TextBox^  LogsVerbosityTextBox;
@@ -92,6 +92,15 @@ namespace powminergpuwingui {
 	private: System::Windows::Forms::Button^  TestStopButton;
 	private: System::Windows::Forms::GroupBox^  HashSpeedGroupBox;
 	private: System::Windows::Forms::TextBox^  HashSpeedTextBox;
+	private: System::Windows::Forms::Timer^  timer1;
+	private: System::Windows::Forms::TabControl^  tabControl1;
+	private: System::Windows::Forms::TabPage^  LogsTabPage;
+
+	private: System::Windows::Forms::TabPage^  ErrorsOnlyTabPage;
+
+	private: System::Windows::Forms::TextBox^  ErrorsTextBox;
+	private: System::ComponentModel::IContainer^  components;
+
 
 
 	protected:
@@ -106,7 +115,7 @@ namespace powminergpuwingui {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -115,6 +124,7 @@ namespace powminergpuwingui {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			this->flowLayoutPanel2 = (gcnew System::Windows::Forms::FlowLayoutPanel());
 			this->DevInfoGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->DevTypeComboBox = (gcnew System::Windows::Forms::ComboBox());
@@ -151,8 +161,12 @@ namespace powminergpuwingui {
 			this->FoundsTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->HashSpeedGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->HashSpeedTextBox = (gcnew System::Windows::Forms::TextBox());
-			this->LogsGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->LogsTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
+			this->LogsTabPage = (gcnew System::Windows::Forms::TabPage());
+			this->ErrorsOnlyTabPage = (gcnew System::Windows::Forms::TabPage());
+			this->ErrorsTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->flowLayoutPanel2->SuspendLayout();
 			this->DevInfoGroupBox->SuspendLayout();
 			this->DeviceTestGroupBox->SuspendLayout();
@@ -163,7 +177,9 @@ namespace powminergpuwingui {
 			this->DeviceControlGroupBox->SuspendLayout();
 			this->FoundsGroupBox->SuspendLayout();
 			this->HashSpeedGroupBox->SuspendLayout();
-			this->LogsGroupBox->SuspendLayout();
+			this->tabControl1->SuspendLayout();
+			this->LogsTabPage->SuspendLayout();
+			this->ErrorsOnlyTabPage->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// flowLayoutPanel2
@@ -177,7 +193,7 @@ namespace powminergpuwingui {
 			this->flowLayoutPanel2->Controls->Add(this->DeviceControlGroupBox);
 			this->flowLayoutPanel2->Controls->Add(this->FoundsGroupBox);
 			this->flowLayoutPanel2->Controls->Add(this->HashSpeedGroupBox);
-			this->flowLayoutPanel2->Controls->Add(this->LogsGroupBox);
+			this->flowLayoutPanel2->Controls->Add(this->tabControl1);
 			this->flowLayoutPanel2->Location = System::Drawing::Point(0, 0);
 			this->flowLayoutPanel2->Name = L"flowLayoutPanel2";
 			this->flowLayoutPanel2->Size = System::Drawing::Size(1104, 466);
@@ -524,25 +540,61 @@ namespace powminergpuwingui {
 			this->HashSpeedTextBox->Size = System::Drawing::Size(126, 20);
 			this->HashSpeedTextBox->TabIndex = 0;
 			// 
-			// LogsGroupBox
-			// 
-			this->LogsGroupBox->Controls->Add(this->LogsTextBox);
-			this->LogsGroupBox->Location = System::Drawing::Point(3, 223);
-			this->LogsGroupBox->Name = L"LogsGroupBox";
-			this->LogsGroupBox->Size = System::Drawing::Size(1101, 240);
-			this->LogsGroupBox->TabIndex = 33;
-			this->LogsGroupBox->TabStop = false;
-			this->LogsGroupBox->Text = L"Logs";
-			// 
 			// LogsTextBox
 			// 
-			this->LogsTextBox->Location = System::Drawing::Point(6, 19);
+			this->LogsTextBox->Location = System::Drawing::Point(1, 1);
 			this->LogsTextBox->Multiline = true;
 			this->LogsTextBox->Name = L"LogsTextBox";
 			this->LogsTextBox->ReadOnly = true;
 			this->LogsTextBox->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->LogsTextBox->Size = System::Drawing::Size(1089, 218);
+			this->LogsTextBox->Size = System::Drawing::Size(1089, 214);
 			this->LogsTextBox->TabIndex = 32;
+			// 
+			// timer1
+			// 
+			this->timer1->Tick += gcnew System::EventHandler(this, &DeviceTab::timer1_Tick);
+			// 
+			// tabControl1
+			// 
+			this->tabControl1->Controls->Add(this->LogsTabPage);
+			this->tabControl1->Controls->Add(this->ErrorsOnlyTabPage);
+			this->tabControl1->Location = System::Drawing::Point(3, 223);
+			this->tabControl1->Name = L"tabControl1";
+			this->tabControl1->SelectedIndex = 0;
+			this->tabControl1->Size = System::Drawing::Size(1101, 243);
+			this->tabControl1->TabIndex = 37;
+			// 
+			// LogsTabPage
+			// 
+			this->LogsTabPage->Controls->Add(this->LogsTextBox);
+			this->LogsTabPage->Location = System::Drawing::Point(4, 22);
+			this->LogsTabPage->Name = L"LogsTabPage";
+			this->LogsTabPage->Padding = System::Windows::Forms::Padding(3);
+			this->LogsTabPage->Size = System::Drawing::Size(1093, 217);
+			this->LogsTabPage->TabIndex = 0;
+			this->LogsTabPage->Text = L"LOGS all";
+			this->LogsTabPage->UseVisualStyleBackColor = true;
+			// 
+			// ErrorsOnlyTabPage
+			// 
+			this->ErrorsOnlyTabPage->Controls->Add(this->ErrorsTextBox);
+			this->ErrorsOnlyTabPage->Location = System::Drawing::Point(4, 22);
+			this->ErrorsOnlyTabPage->Name = L"ErrorsOnlyTabPage";
+			this->ErrorsOnlyTabPage->Padding = System::Windows::Forms::Padding(3);
+			this->ErrorsOnlyTabPage->Size = System::Drawing::Size(1093, 217);
+			this->ErrorsOnlyTabPage->TabIndex = 1;
+			this->ErrorsOnlyTabPage->Text = L"ERRORS only";
+			this->ErrorsOnlyTabPage->UseVisualStyleBackColor = true;
+			// 
+			// ErrorsTextBox
+			// 
+			this->ErrorsTextBox->Location = System::Drawing::Point(1, 1);
+			this->ErrorsTextBox->Multiline = true;
+			this->ErrorsTextBox->Name = L"ErrorsTextBox";
+			this->ErrorsTextBox->ReadOnly = true;
+			this->ErrorsTextBox->ScrollBars = System::Windows::Forms::ScrollBars::Both;
+			this->ErrorsTextBox->Size = System::Drawing::Size(1089, 214);
+			this->ErrorsTextBox->TabIndex = 38;
 			// 
 			// DeviceTab
 			// 
@@ -569,8 +621,11 @@ namespace powminergpuwingui {
 			this->FoundsGroupBox->PerformLayout();
 			this->HashSpeedGroupBox->ResumeLayout(false);
 			this->HashSpeedGroupBox->PerformLayout();
-			this->LogsGroupBox->ResumeLayout(false);
-			this->LogsGroupBox->PerformLayout();
+			this->tabControl1->ResumeLayout(false);
+			this->LogsTabPage->ResumeLayout(false);
+			this->LogsTabPage->PerformLayout();
+			this->ErrorsOnlyTabPage->ResumeLayout(false);
+			this->ErrorsOnlyTabPage->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -722,6 +777,10 @@ public: TextBox^ GetLogsTextBox(void) {
 	return this->LogsTextBox;
 }
 
+public: TextBox^ GetErrorsTextBox(void) {
+	return this->ErrorsTextBox;
+}
+
 public: CheckBox^ GetMinerAutoRstCheckBox(void) {
 	return this->MinerAutoRstCheckBox;
 }
@@ -732,6 +791,10 @@ public: TextBox^ GetLogsMaxLinesTextBox(void) {
 
 public: TextBox^ GetLogsFoundsTextBox(void) {
 	return this->FoundsTextBox;
+}
+
+public: TextBox^ GetBoostFactorTextBox(void) {
+	return this->BoostFactorTextBox;
 }
 
 public: TextBox^ GetHashSpeedTextBox(void) {
@@ -771,6 +834,8 @@ public: void MinerStop(void) {
 
 	this->MinerStartButton->Enabled = true;
 	this->MinerStopButton->Enabled = false;
+
+	this->HashSpeedTextBox->Text = "";
 
 }
 
@@ -825,6 +890,16 @@ private: System::Void GiverStrategyComboBox_SelectedIndexChanged(System::Object^
 
 public: AppSysSubProcess* AppSysSubProcess_1 = NULL;
 
+private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
+
+	// this->HashSpeedTextBox->Text = "1";
+
+	if (this->AppSysSubProcess_1->run_status == false) {
+		this->TestStop();
+	}
+
+}
+
 private: System::Void TestStartButton_Click(System::Object^  sender, System::EventArgs^  e) {
 
 	this->DevInfoGroupBox->Enabled = false;
@@ -873,11 +948,16 @@ private: System::Void TestStartButton_Click(System::Object^  sender, System::Eve
 		AppSysSubProcess_1->Run(test_cuda_cmd, "", wd, false); // 2>&1
 	else if (this->DevTypeComboBox->SelectedIndex == 1)
 		AppSysSubProcess_1->Run(test_opencl_cmd, "", wd, false); // 2>&1
+
+	this->timer1->Interval = 100;
+	this->timer1->Start();
 	
 }
 		 
 public: void TestStop(void) {
 
+	this->timer1->Stop();
+	
 	AppSysSubProcess_1->Stop();
 
 	this->DevInfoGroupBox->Enabled = true;
@@ -975,5 +1055,6 @@ private: System::Void DevPidTextBox_TextChanged(System::Object^  sender, System:
 private: System::Void DevDidTextBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 	UpdateTabPage_Name();
 }
+
 };
 }

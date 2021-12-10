@@ -75,7 +75,8 @@ namespace powminergpuwingui {
 				this->StartAll();
 			}
 
-			
+			timer1->Interval = 100;
+			timer1->Start();
 
 			//
 			
@@ -118,13 +119,17 @@ namespace powminergpuwingui {
 	private: System::Windows::Forms::Button^  StartAllButton;
 	private: System::Windows::Forms::Button^  StopAllButton;
 	private: System::Windows::Forms::ToolStripMenuItem^  settingsToolStripMenuItem;
+	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::TextBox^  RigHashTextBox;
+	private: System::Windows::Forms::Timer^  timer1;
+	private: System::ComponentModel::IContainer^  components;
 
 
 	private:
 		/// <summary>
 		/// Обязательная переменная конструктора.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -133,6 +138,7 @@ namespace powminergpuwingui {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -151,9 +157,12 @@ namespace powminergpuwingui {
 			this->flowLayoutPanel1 = (gcnew System::Windows::Forms::FlowLayoutPanel());
 			this->StartAllButton = (gcnew System::Windows::Forms::Button());
 			this->StopAllButton = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->RigHashTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->DevicesTabControl = (gcnew System::Windows::Forms::TabControl());
 			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->menuStrip1->SuspendLayout();
 			this->flowLayoutPanel1->SuspendLayout();
 			this->SuspendLayout();
@@ -230,16 +239,21 @@ namespace powminergpuwingui {
 			this->aboutToolStripMenuItem->Text = L"About";
 			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::AboutCallback);
 			// 
+			// backgroundWorker1
+			// 
+			this->backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::backgroundWorker1_DoWork);
+			this->backgroundWorker1->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::backgroundWorker1_RunWorkerCompleted);
+			// 
 			// DevicesListBox
 			// 
 			this->DevicesListBox->Dock = System::Windows::Forms::DockStyle::Top;
 			this->DevicesListBox->FormattingEnabled = true;
 			this->DevicesListBox->HorizontalScrollbar = true;
 			this->DevicesListBox->Location = System::Drawing::Point(3, 32);
-			this->DevicesListBox->MaximumSize = System::Drawing::Size(310, 400);
-			this->DevicesListBox->MinimumSize = System::Drawing::Size(310, 400);
+			this->DevicesListBox->MaximumSize = System::Drawing::Size(310, 375);
+			this->DevicesListBox->MinimumSize = System::Drawing::Size(310, 375);
 			this->DevicesListBox->Name = L"DevicesListBox";
-			this->DevicesListBox->Size = System::Drawing::Size(310, 394);
+			this->DevicesListBox->Size = System::Drawing::Size(310, 368);
 			this->DevicesListBox->TabIndex = 3;
 			// 
 			// SearchCUDADevicesButton
@@ -256,7 +270,7 @@ namespace powminergpuwingui {
 			// UseDeviceButton
 			// 
 			this->UseDeviceButton->Dock = System::Windows::Forms::DockStyle::Top;
-			this->UseDeviceButton->Location = System::Drawing::Point(3, 438);
+			this->UseDeviceButton->Location = System::Drawing::Point(3, 413);
 			this->UseDeviceButton->Name = L"UseDeviceButton";
 			this->UseDeviceButton->Size = System::Drawing::Size(310, 23);
 			this->UseDeviceButton->TabIndex = 4;
@@ -283,6 +297,8 @@ namespace powminergpuwingui {
 			this->flowLayoutPanel1->Controls->Add(this->UseDeviceButton);
 			this->flowLayoutPanel1->Controls->Add(this->StartAllButton);
 			this->flowLayoutPanel1->Controls->Add(this->StopAllButton);
+			this->flowLayoutPanel1->Controls->Add(this->label1);
+			this->flowLayoutPanel1->Controls->Add(this->RigHashTextBox);
 			this->flowLayoutPanel1->Location = System::Drawing::Point(4, 24);
 			this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
 			this->flowLayoutPanel1->Size = System::Drawing::Size(316, 498);
@@ -290,23 +306,47 @@ namespace powminergpuwingui {
 			// 
 			// StartAllButton
 			// 
-			this->StartAllButton->Location = System::Drawing::Point(3, 467);
+			this->StartAllButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(255)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->StartAllButton->Location = System::Drawing::Point(3, 442);
 			this->StartAllButton->Name = L"StartAllButton";
 			this->StartAllButton->Size = System::Drawing::Size(152, 23);
 			this->StartAllButton->TabIndex = 5;
 			this->StartAllButton->Text = L"Start all";
-			this->StartAllButton->UseVisualStyleBackColor = true;
+			this->StartAllButton->UseVisualStyleBackColor = false;
 			this->StartAllButton->Click += gcnew System::EventHandler(this, &MainForm::StartAllButton_Click);
 			// 
 			// StopAllButton
 			// 
-			this->StopAllButton->Location = System::Drawing::Point(161, 467);
+			this->StopAllButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->StopAllButton->Location = System::Drawing::Point(161, 442);
 			this->StopAllButton->Name = L"StopAllButton";
 			this->StopAllButton->Size = System::Drawing::Size(152, 23);
 			this->StopAllButton->TabIndex = 6;
 			this->StopAllButton->Text = L"Stop all";
-			this->StopAllButton->UseVisualStyleBackColor = true;
+			this->StopAllButton->UseVisualStyleBackColor = false;
 			this->StopAllButton->Click += gcnew System::EventHandler(this, &MainForm::StopAllButton_Click);
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label1->Location = System::Drawing::Point(7, 474);
+			this->label1->Margin = System::Windows::Forms::Padding(7, 6, 3, 0);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(148, 13);
+			this->label1->TabIndex = 8;
+			this->label1->Text = L"RIG TOTAL HASHRATE:";
+			// 
+			// RigHashTextBox
+			// 
+			this->RigHashTextBox->Location = System::Drawing::Point(162, 471);
+			this->RigHashTextBox->Margin = System::Windows::Forms::Padding(4, 3, 3, 3);
+			this->RigHashTextBox->Name = L"RigHashTextBox";
+			this->RigHashTextBox->Size = System::Drawing::Size(149, 20);
+			this->RigHashTextBox->TabIndex = 7;
 			// 
 			// DevicesTabControl
 			// 
@@ -320,6 +360,10 @@ namespace powminergpuwingui {
 			// openFileDialog1
 			// 
 			this->openFileDialog1->FileName = L"openFileDialog1";
+			// 
+			// timer1
+			// 
+			this->timer1->Tick += gcnew System::EventHandler(this, &MainForm::timer1_Tick);
 			// 
 			// MainForm
 			// 
@@ -341,6 +385,7 @@ namespace powminergpuwingui {
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->flowLayoutPanel1->ResumeLayout(false);
+			this->flowLayoutPanel1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -532,6 +577,31 @@ public: void DeviceTab_LogsTextBoxAddLine(DeviceTab^ DeviceTab, System::String^ 
 			DeviceTab->GetLogsFoundsTextBox()->Text = dt_line;
 			DeviceTab->AppSysSubProcess_0->DataVector.push_back(msclr::interop::marshal_as<std::string>(dt_line));
 		}
+		
+		// best boost factor: 128
+
+		if (dt_line->Contains("best boost factor:")) {
+
+			char *p_char = NULL;
+
+			if ((p_char = (char *) strstr(msclr::interop::marshal_as<std::string>(dt_line).c_str(), "best boost factor:")) != NULL) {
+
+				int tmp_i;
+
+				if (sscanf(p_char, "best boost factor: %d", &tmp_i) == 1) {
+
+					DeviceTab->GetBoostFactorTextBox()->Text = gcnew System::String(std::to_string(tmp_i).c_str());
+
+				}
+
+
+				
+
+			}
+
+		}
+
+		//
 
 		if (dt_line->Contains("average speed:")) {
 			
@@ -559,11 +629,7 @@ public: void DeviceTab_LogsTextBoxAddLine(DeviceTab^ DeviceTab, System::String^ 
 		DeviceTab->GetLogsTextBox()->AppendText(dt_line);		
 
 		int max_lines_qnt = int::Parse( DeviceTab->GetLogsMaxLinesTextBox()->Text );
-
-		System::String^ Text = gcnew System::String("");
-		
-		Text->Copy(DeviceTab->GetLogsMaxLinesTextBox()->Text);
-		
+				
 		array <String^>^ string_array_temp = DeviceTab->GetLogsTextBox()->Text->Split('\n');
 
 		int lines_qnt = string_array_temp->Length;
@@ -590,6 +656,26 @@ public: void DeviceTab_LogsTextBoxAddLine(DeviceTab^ DeviceTab, System::String^ 
 
 			}
 			*/
+
+		}
+
+		//
+
+		if (dt_line->Contains("ERR") || dt_line->Contains("err") || dt_line->Contains("Err") ) {
+
+			DeviceTab->GetErrorsTextBox()->AppendText(dt_line);
+
+			int max_lines_qnt = int::Parse(DeviceTab->GetLogsMaxLinesTextBox()->Text);
+
+			array <String^>^ string_array_temp = DeviceTab->GetErrorsTextBox()->Text->Split('\n');
+
+			int lines_qnt = string_array_temp->Length;
+
+			if (lines_qnt > max_lines_qnt) {
+
+				DeviceTab->GetErrorsTextBox()->Text = "";
+
+			}
 
 		}
 		
@@ -696,7 +782,6 @@ private: void LoadConfig() {
 		MinerConfig_tmp = gcnew MinerConfig();
 
 		for (int i = 0; i < miners_json_strings.size()-1; i++) {
-
 						
 			if (MinerConfig_tmp->import_json_string(miners_json_strings.at(i)) == 0) {
 
@@ -720,9 +805,7 @@ private: void LoadConfig() {
 
 				// DeviceTab_0->GetTabPage()->Show();
 
-
 			}
-
 
 		}
 
@@ -1006,6 +1089,50 @@ private: System::Void settingsToolStripMenuItem_Click(System::Object^  sender, S
 		this->sets_startm_ragui = SettingsFormObject.AutoStartMinersFlag;
 	}
 
+
+}
+
+private: System::Void backgroundWorker1_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e) {
+
+}
+
+private: System::Void backgroundWorker1_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e) {
+
+}
+
+private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
+
+	float float_tmp = 0;
+	float float_total = 0;
+
+	GCHandle h;
+	DeviceTab^ P_DeviceTab_TMP;
+
+	if (DeviceTabsMap->map_void.empty())
+		return;
+
+	for (std::map<std::string, void *>::iterator it = DeviceTabsMap->map_void.begin(); it != DeviceTabsMap->map_void.end(); it++) {
+
+		h = GCHandle::FromIntPtr(IntPtr(it->second));
+		P_DeviceTab_TMP = reinterpret_cast<DeviceTab^>(h.Target);
+
+		if (!P_DeviceTab_TMP->AppSysSubProcess_0->run_status) {
+			// P_DeviceTab_TMP->GetHashSpeedTextBox()->Text = "";
+			continue;
+		}
+
+
+		if (sscanf(msclr::interop::marshal_as<std::string>(P_DeviceTab_TMP->GetHashSpeedTextBox()->Text).c_str(), " %f Mhash/s ", &float_tmp) == 1)
+			float_total += float_tmp;
+
+	}
+
+	char tmp_str[256] = { "" };
+
+	sprintf(tmp_str, "%.3f Mhash/s", float_total);
+
+	this->RigHashTextBox->Text = gcnew String(tmp_str);
+	// this->RigHashTextBox->Refresh();
 
 }
 };

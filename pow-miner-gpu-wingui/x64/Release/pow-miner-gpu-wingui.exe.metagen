@@ -44,9 +44,11 @@ Class powminergpuwingui.DeviceTab: AutoLayout, AnsiClass, Class, Public, BeforeF
     MinerStart(): PrivateScope, Public, HideBySig
     MinerRestart(): PrivateScope, Public, HideBySig
     GetLogsTextBox(): PrivateScope, Public, HideBySig
+    GetErrorsTextBox(): PrivateScope, Public, HideBySig
     GetMinerAutoRstCheckBox(): PrivateScope, Public, HideBySig
     GetLogsMaxLinesTextBox(): PrivateScope, Public, HideBySig
     GetLogsFoundsTextBox(): PrivateScope, Public, HideBySig
+    GetBoostFactorTextBox(): PrivateScope, Public, HideBySig
     GetHashSpeedTextBox(): PrivateScope, Public, HideBySig
     MinerStop(): PrivateScope, Public, HideBySig
     MinerStopButton_Click(Object, EventArgs): PrivateScope, Public, HideBySig

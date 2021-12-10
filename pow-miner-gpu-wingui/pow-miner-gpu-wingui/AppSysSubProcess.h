@@ -49,6 +49,8 @@ public:
 	void (*stdoutNLCallBack)		(void *handle)  = NULL;
 	void (*processFinishCallBack)	(void *handle)  = NULL;
 
+	bool run_status = false;
+
 	static DWORD __stdcall stdoutReadThreadProcedure(void * argh)
 	{
 
@@ -108,6 +110,10 @@ public:
 				{
 
 				}
+
+				//
+
+				p_this->run_status = false;
 
 				//
 
@@ -258,6 +264,8 @@ public:
 		// Create thread for grabbing stdout of child process
 		stdoutReadThread = CreateThread(0, 0, AppSysSubProcess::stdoutReadThreadProcedure, (void *)this, 0, NULL);
 		
+		this->run_status = true;
+
 		if (wait_flag) {
 
 			WaitForSingleObject(stdoutReadThread, INFINITE);
@@ -277,6 +285,8 @@ public:
 
 	public: HRESULT Stop()
 	{
+
+		this->run_status = false;
 
 		this->stdoutNLCallBack = NULL;
 		this->processFinishCallBack = NULL;
