@@ -61,11 +61,14 @@ namespace powminergpuwingui {
 
 			CreateDirectoryA((AppSysSubProcess::ExePath() + "\\config\\autosave_dumps").c_str(), NULL);
 			CreateDirectoryA((AppSysSubProcess::ExePath() + "\\miners").c_str(), NULL);
+			CreateDirectoryA((AppSysSubProcess::ExePath() + "\\logs_dumps").c_str(), NULL);
 
 			AppSysSubProcess AppSysSubProcess_Dl_Config;
 
-			AppSysSubProcess_Dl_Config.Run("\"" + AppSysSubProcess::ExePath() + "\\tools\\wget\\wget.exe\"" + " -N https://newton-blockchain.github.io/global.config.json", "",
+			AppSysSubProcess_Dl_Config.Run("\"" + AppSysSubProcess::ExePath() + "\\tools\\wget\\wget.exe\"" + " --timeout=1 --tries=5 -N https://newton-blockchain.github.io/global.config.json", "",
 				AppSysSubProcess::ExePath() + "\\config", true);
+
+
 
 			DeviceTabsMap = new MapVoid();
 
@@ -659,11 +662,61 @@ public: void DeviceTab_LogsTextBoxAddLine(DeviceTab^ DeviceTab, System::String^ 
 
 		}
 
+		if (this->sets_dump_logs_mode == 2) {
+
+			std::string dt_str = DeviceTab->AppSysSubProcess_0->time_stamp;
+			std::string dest_file_str = AppSysSubProcess::ExePath() + "\\logs_dumps\\" + "logs_%s_%s_" + "%s" + ".txt";
+			char dest_file_char[2048] = { "" };
+
+			char text[128];
+			strcpy(text, msclr::interop::marshal_as<std::string>(DeviceTab->GetTabPage()->Text).c_str());
+
+			for (int i = 0; i < strlen(text); i++) {
+				switch (text[i]) {
+				case ' ':
+				case '[':
+				case ']':
+				case ':': text[i] = '_'; break;
+				default: break;
+				}
+			}
+
+			sprintf(dest_file_char, dest_file_str.c_str(), DeviceTab->GetTabPage()->Name, text, dt_str.c_str());
+
+			AppSysSubProcess::AppendLineToFile(dest_file_char, &msclr::interop::marshal_as<std::string>(dt_line));
+
+		}
+
 		//
 
 		if (dt_line->Contains("ERR") || dt_line->Contains("err") || dt_line->Contains("Err") ) {
 
-			DeviceTab->GetErrorsTextBox()->AppendText(dt_line);
+			DeviceTab->GetErrorsTextBox()->AppendText(dt_line);			
+
+			if (this->sets_dump_logs_mode == 1) {
+				
+				std::string dt_str = DeviceTab->AppSysSubProcess_0->time_stamp;
+				std::string dest_file_str = AppSysSubProcess::ExePath() + "\\logs_dumps\\" + "errors_%s_%s_" + "%s" + ".txt";
+				char dest_file_char[2048] = { "" };
+
+				char text[128];
+				strcpy(text, msclr::interop::marshal_as<std::string>(DeviceTab->GetTabPage()->Text).c_str());
+
+				for (int i = 0; i < strlen(text); i++) {
+					switch (text[i]) {
+						case ' ':
+						case '[':
+						case ']':
+						case ':': text[i] = '_'; break;
+						default: break;
+					}
+				}
+
+				sprintf(dest_file_char, dest_file_str.c_str(), DeviceTab->GetTabPage()->Name, text, dt_str.c_str());
+
+				AppSysSubProcess::AppendLineToFile(dest_file_char, &msclr::interop::marshal_as<std::string>(dt_line));
+
+			}	
 
 			int max_lines_qnt = int::Parse(DeviceTab->GetLogsMaxLinesTextBox()->Text);
 
@@ -815,6 +868,14 @@ private: void LoadConfig() {
 		if (!mjson_get_number(json_chars, strlen(json_chars), "$.startm_ragui", &double_tmp))
 			return;
 		this->sets_startm_ragui = double_tmp;
+
+
+		// char json_chars[4096];
+		// double double_tmp;
+		strcpy(json_chars, miners_json_strings.at(miners_json_strings.size() - 1).c_str());
+		if (!mjson_get_number(json_chars, strlen(json_chars), "$.dump_logs_mode", &double_tmp))
+			return;
+		this->sets_dump_logs_mode = double_tmp;
 	
 
 	}
@@ -923,9 +984,9 @@ public: void SaveConfig(bool force) {
 
 	}
 
-	char *json_chars = mjson_aprintf("{%Q:%d}",
-		"startm_ragui", this->sets_startm_ragui);
-
+	char *json_chars = mjson_aprintf("{%Q:%d, %Q:%d}",
+		"startm_ragui", this->sets_startm_ragui, "dump_logs_mode", this->sets_dump_logs_mode);
+	
 	vect_string.push_back(std::string(json_chars) + "\n");
 
 	free(json_chars);
@@ -975,8 +1036,8 @@ public: void SaveConfig_ToFile( std::string filename ) {
 
 	}
 
-	char *json_chars = mjson_aprintf("{%Q:%d}",
-		"startm_ragui", this->sets_startm_ragui );
+	char *json_chars = mjson_aprintf("{%Q:%d, %Q:%d}",
+		"startm_ragui", this->sets_startm_ragui, "dump_logs_mode", this->sets_dump_logs_mode);
 
 	vect_string.push_back( std::string(json_chars) + "\n");
 
@@ -1019,6 +1080,11 @@ public: int LoadConfig_FromFile(std::string filename, bool only_test) {
 			return 1;
 		// this->sets_startm_ragui = double_tmp;
 
+		strcpy(json_chars, miners_json_strings.at(miners_json_strings.size() - 1).c_str());
+		if (!mjson_get_number(json_chars, strlen(json_chars), "$.dump_logs_mode", &double_tmp))
+			return 1;
+		// this->sets_dump_logs_mode = double_tmp;
+
 		if (only_test == true)
 			return 0;
 
@@ -1060,6 +1126,11 @@ public: int LoadConfig_FromFile(std::string filename, bool only_test) {
 			return 1;
 		this->sets_startm_ragui = double_tmp;
 
+		strcpy(json_chars, miners_json_strings.at(miners_json_strings.size() - 1).c_str());
+		if (!mjson_get_number(json_chars, strlen(json_chars), "$.dump_logs_mode", &double_tmp))
+			return 1;
+		this->sets_dump_logs_mode = double_tmp;
+
 		return 0;
 
 
@@ -1072,6 +1143,7 @@ public: int LoadConfig_FromFile(std::string filename, bool only_test) {
 }
 
 public: bool sets_startm_ragui = 0;
+public: int sets_dump_logs_mode = 0;
 
 private: System::Void settingsToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 
@@ -1081,12 +1153,15 @@ private: System::Void settingsToolStripMenuItem_Click(System::Object^  sender, S
 		SettingsFormObject.AutoStartMinersFlag = true;
 	}
 
+	SettingsFormObject.DumpLogsMode = sets_dump_logs_mode;
+
 	SettingsFormObject.Update();
 		
 	SettingsFormObject.ShowDialog();
 
 	if (SettingsFormObject.NewSettingsApplied) {
 		this->sets_startm_ragui = SettingsFormObject.AutoStartMinersFlag;
+		this->sets_dump_logs_mode = SettingsFormObject.DumpLogsMode;
 	}
 
 

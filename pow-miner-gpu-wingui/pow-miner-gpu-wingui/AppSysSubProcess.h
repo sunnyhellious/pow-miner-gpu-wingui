@@ -51,6 +51,8 @@ public:
 
 	bool run_status = false;
 
+	std::string time_stamp;
+
 	static DWORD __stdcall stdoutReadThreadProcedure(void * argh)
 	{
 
@@ -261,11 +263,13 @@ public:
 
 		CloseHandle(stdoutWriteHandle);
 
+		time_stamp = AppSysSubProcess::GetDateTime();
+		
 		// Create thread for grabbing stdout of child process
 		stdoutReadThread = CreateThread(0, 0, AppSysSubProcess::stdoutReadThreadProcedure, (void *)this, 0, NULL);
 		
 		this->run_status = true;
-
+		
 		if (wait_flag) {
 
 			WaitForSingleObject(stdoutReadThread, INFINITE);
@@ -494,5 +498,31 @@ public:
 		return err;
 
 	}
+
+	public: static int AppendLineToFile(std::string file, std::string *p_string) {
+
+		FILE *stream;
+		int err = 0;
+
+		if (fopen_s(&stream, file.c_str(), "a") == 0)
+		{
+
+			if (fputs(p_string->c_str(), stream) < 0)
+				err = 1;
+			
+			fclose(stream);
+
+		}
+		else {
+
+			err = 1;
+
+		}
+
+
+		return err;
+
+	}
+
 
 };

@@ -99,6 +99,8 @@ namespace powminergpuwingui {
 	private: System::Windows::Forms::TabPage^  ErrorsOnlyTabPage;
 
 	private: System::Windows::Forms::TextBox^  ErrorsTextBox;
+
+
 	private: System::ComponentModel::IContainer^  components;
 
 
@@ -161,12 +163,12 @@ namespace powminergpuwingui {
 			this->FoundsTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->HashSpeedGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->HashSpeedTextBox = (gcnew System::Windows::Forms::TextBox());
-			this->LogsTextBox = (gcnew System::Windows::Forms::TextBox());
-			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->LogsTabPage = (gcnew System::Windows::Forms::TabPage());
+			this->LogsTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->ErrorsOnlyTabPage = (gcnew System::Windows::Forms::TabPage());
 			this->ErrorsTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->flowLayoutPanel2->SuspendLayout();
 			this->DevInfoGroupBox->SuspendLayout();
 			this->DeviceTestGroupBox->SuspendLayout();
@@ -384,7 +386,7 @@ namespace powminergpuwingui {
 			// 
 			this->LogsVerbosityTextBox->Location = System::Drawing::Point(63, 42);
 			this->LogsVerbosityTextBox->Name = L"LogsVerbosityTextBox";
-			this->LogsVerbosityTextBox->Size = System::Drawing::Size(93, 20);
+			this->LogsVerbosityTextBox->Size = System::Drawing::Size(92, 20);
 			this->LogsVerbosityTextBox->TabIndex = 24;
 			this->LogsVerbosityTextBox->TextChanged += gcnew System::EventHandler(this, &DeviceTab::textBox1_TextChanged);
 			// 
@@ -401,7 +403,7 @@ namespace powminergpuwingui {
 			// 
 			this->LogsMaxLinesTextBox->Location = System::Drawing::Point(63, 18);
 			this->LogsMaxLinesTextBox->Name = L"LogsMaxLinesTextBox";
-			this->LogsMaxLinesTextBox->Size = System::Drawing::Size(93, 20);
+			this->LogsMaxLinesTextBox->Size = System::Drawing::Size(92, 20);
 			this->LogsMaxLinesTextBox->TabIndex = 22;
 			// 
 			// MinerExecCtrlGroupBox
@@ -540,20 +542,6 @@ namespace powminergpuwingui {
 			this->HashSpeedTextBox->Size = System::Drawing::Size(126, 20);
 			this->HashSpeedTextBox->TabIndex = 0;
 			// 
-			// LogsTextBox
-			// 
-			this->LogsTextBox->Location = System::Drawing::Point(1, 1);
-			this->LogsTextBox->Multiline = true;
-			this->LogsTextBox->Name = L"LogsTextBox";
-			this->LogsTextBox->ReadOnly = true;
-			this->LogsTextBox->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->LogsTextBox->Size = System::Drawing::Size(1089, 214);
-			this->LogsTextBox->TabIndex = 32;
-			// 
-			// timer1
-			// 
-			this->timer1->Tick += gcnew System::EventHandler(this, &DeviceTab::timer1_Tick);
-			// 
 			// tabControl1
 			// 
 			this->tabControl1->Controls->Add(this->LogsTabPage);
@@ -575,6 +563,16 @@ namespace powminergpuwingui {
 			this->LogsTabPage->Text = L"LOGS all";
 			this->LogsTabPage->UseVisualStyleBackColor = true;
 			// 
+			// LogsTextBox
+			// 
+			this->LogsTextBox->Location = System::Drawing::Point(1, 1);
+			this->LogsTextBox->Multiline = true;
+			this->LogsTextBox->Name = L"LogsTextBox";
+			this->LogsTextBox->ReadOnly = true;
+			this->LogsTextBox->ScrollBars = System::Windows::Forms::ScrollBars::Both;
+			this->LogsTextBox->Size = System::Drawing::Size(1089, 214);
+			this->LogsTextBox->TabIndex = 32;
+			// 
 			// ErrorsOnlyTabPage
 			// 
 			this->ErrorsOnlyTabPage->Controls->Add(this->ErrorsTextBox);
@@ -595,6 +593,10 @@ namespace powminergpuwingui {
 			this->ErrorsTextBox->ScrollBars = System::Windows::Forms::ScrollBars::Both;
 			this->ErrorsTextBox->Size = System::Drawing::Size(1089, 214);
 			this->ErrorsTextBox->TabIndex = 38;
+			// 
+			// timer1
+			// 
+			this->timer1->Tick += gcnew System::EventHandler(this, &DeviceTab::timer1_Tick);
 			// 
 			// DeviceTab
 			// 
