@@ -97,6 +97,9 @@
     <EmbeddedResource Include="UpdateToolsForm.resx">
       <Filter>Файлы ресурсов</Filter>
     </EmbeddedResource>
+    <EmbeddedResource Include="SettingsForm.resx">
+      <Filter>Файлы ресурсов</Filter>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="pow-miner-gpu-wingui.rc">
@@ -104,7 +107,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Icon.ico">
+    <Image Include="app.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>

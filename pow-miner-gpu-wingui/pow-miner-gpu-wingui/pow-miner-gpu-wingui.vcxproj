@@ -195,7 +195,7 @@
     <ResourceCompile Include="pow-miner-gpu-wingui.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Icon.ico" />
+    <Image Include="app.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
