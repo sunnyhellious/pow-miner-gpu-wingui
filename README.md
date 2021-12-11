@@ -18,7 +18,8 @@ How to use:
 9. Type "Wallet address"
 10. Press "Start" or "Start all" button
 11. In File->Settings you can also configure AUTO START ALL MINERS after GUI start! It can be very helpfull if your rig reboots sometimes.
-12. Enjoy!
+12. In File->Settings you can also configure AUTO LOGS/ERRORS DUMP to files FEATURE.
+13. Enjoy!
 
 If you have any problems with DLLs on start try to install:
 1. __Microsoft Visual C++ Visual Studio 2015-2019 Redistributable x64 (offline installator)__ - https://go.microsoft.com/fwlink/?LinkId=746572
