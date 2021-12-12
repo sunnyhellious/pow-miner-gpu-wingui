@@ -9,8 +9,8 @@ Install prerequisites before start:
 How to use:
 1. Download and extract __to path with no Cyrillic symbols__ or use __.MSI or .EXE installers__! If you will use an installer then <br />
 the __default installation directory will be "C:\TON Community\pow-miner-gpu-wingui"__. If you will change the directory for instance to <br />
-__"C:\Program Files\TON Community\pow-miner-gpu-wingui"__ then for any file operations like update or dumps __you will need to start application with <br />
-administrative rights__. So, please, left default installation directory.
+__"C:\Program Files\TON Community\pow-miner-gpu-wingui"__ then for any file operations like update or dumps __you will need to start <br />
+application with administrative rights__. So, please, left default installation directory.
 2. Execute pow-miner-gpu-wingui.exe
 3. Go to "file->update tools"
 4. It will update "miner-tools-*" and "global.config.json"
