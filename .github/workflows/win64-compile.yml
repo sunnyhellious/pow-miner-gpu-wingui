@@ -12,6 +12,7 @@ defaults:
 env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_FILE_PATH: .\pow-miner-gpu-wingui\pow-miner-gpu-wingui.sln
+  INSTALLER_SOLUTION_FILE_PATH: .\pow-miner-gpu-wingui-installer\pow-miner-gpu-wingui-installer.sln
 
   # Configuration type to build.
   # You can convert this to a build matrix if you need coverage of multiple configuration types.
@@ -41,6 +42,13 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
       
+    - name: Build installer
+      if: ${{ true }}
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      # Add additional options to the MSBuild command line here (like platform or verbosity level).
+      # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
+      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.INSTALLER_SOLUTION_FILE_PATH}}
+      
     - name: Delete some sh**
       run: FOR %%a IN (".\pow-miner-gpu-wingui\x64\Release\*") DO IF /i NOT "%%~nxa"=="pow-miner-gpu-wingui.exe" IF /i NOT "%%~nxa"=="msvcp140.dll" IF /i NOT "%%~nxa"=="IDI_ICON1.ico" DEL "%%a"   
     
@@ -49,6 +57,16 @@ jobs:
         cd pow-miner-gpu-wingui\x64\Release\    
         mkdir miners
         7z a ..\..\..\artifacts_dir\pow-miner-gpu-wingui-x86-64.zip .\
+        
+    - name: Zip exe installer
+      run: |
+        cd pow-miner-gpu-wingui-installer\pow-miner-gpu-wingui-installer\Release\   
+        7z a ..\..\..\artifacts_dir\pow-miner-gpu-wingui-installer-exe-x86-64.zip .\setup.exe
+        
+    - name: Zip msi installer
+      run: |
+        cd pow-miner-gpu-wingui-installer\pow-miner-gpu-wingui-installer\Release\   
+        7z a ..\..\..\artifacts_dir\pow-miner-gpu-wingui-installer-msi-x86-64.zip .\pow-miner-gpu-wingui.msi
             
     - name: Packing binary files to the GITHUB Release Tag
       uses: ncipollo/release-action@v1
