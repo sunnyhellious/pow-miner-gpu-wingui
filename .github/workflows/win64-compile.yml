@@ -47,7 +47,9 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.INSTALLER_SOLUTION_FILE_PATH}}
+      # run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.INSTALLER_SOLUTION_FILE_PATH}}
+      run: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\devenv.com .\\pow-miner-gpu-wingui-installer\\pow-miner-gpu-wingui-installer.sln /build Release /project .\\pow-miner-gpu-wingui-installer\\pow-miner-gpu-wingui-installer.vdproj /projectconfig Release" 
+      
       
     - name: Delete some sh**
       run: FOR %%a IN (".\pow-miner-gpu-wingui\x64\Release\*") DO IF /i NOT "%%~nxa"=="pow-miner-gpu-wingui.exe" IF /i NOT "%%~nxa"=="msvcp140.dll" IF /i NOT "%%~nxa"=="IDI_ICON1.ico" DEL "%%a"   
