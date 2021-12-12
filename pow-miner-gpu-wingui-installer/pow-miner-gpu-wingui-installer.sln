@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1738
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "pow-miner-gpu-wingui-installer", "pow-miner-gpu-wingui-installer\pow-miner-gpu-wingui-installer.vdproj", "{9B240D24-1837-4849-9043-250E74F7A474}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B240D24-1837-4849-9043-250E74F7A474}.Debug|Default.ActiveCfg = Debug
+		{9B240D24-1837-4849-9043-250E74F7A474}.Debug|Default.Build.0 = Debug
+		{9B240D24-1837-4849-9043-250E74F7A474}.Release|Default.ActiveCfg = Release
+		{9B240D24-1837-4849-9043-250E74F7A474}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {228EC860-9B07-4F95-AD26-5B80291D4CA5}
+	EndGlobalSection
+EndGlobal
