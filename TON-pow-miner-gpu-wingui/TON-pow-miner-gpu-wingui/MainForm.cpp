@@ -8,6 +8,6 @@ void main(array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	//WinformCDemo is your project name
-	powminergpuwingui::MainForm form;	
+	tonpowminergpuwingui::MainForm form;	
 	Application::Run(%form);
 }

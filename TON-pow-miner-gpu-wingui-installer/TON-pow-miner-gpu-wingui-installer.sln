@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1738
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "pow-miner-gpu-wingui-installer", "pow-miner-gpu-wingui-installer\pow-miner-gpu-wingui-installer.vdproj", "{9B240D24-1837-4849-9043-250E74F7A474}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TON-pow-miner-gpu-wingui-installer", "TON-pow-miner-gpu-wingui-installer\TON-pow-miner-gpu-wingui-installer.vdproj", "{9B240D24-1837-4849-9043-250E74F7A474}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

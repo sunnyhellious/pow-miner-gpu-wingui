@@ -11,8 +11,8 @@ defaults:
 
 env:
   # Path to the solution file relative to the root of the project.
-  SOLUTION_FILE_PATH: .\pow-miner-gpu-wingui\pow-miner-gpu-wingui.sln
-  INSTALLER_SOLUTION_FILE_PATH: .\pow-miner-gpu-wingui-installer\pow-miner-gpu-wingui-installer.sln
+  SOLUTION_FILE_PATH: .\TON-pow-miner-gpu-wingui\TON-pow-miner-gpu-wingui.sln
+  INSTALLER_SOLUTION_FILE_PATH: .\TON-pow-miner-gpu-wingui-installer\TON-pow-miner-gpu-wingui-installer.sln
 
   # Configuration type to build.
   # You can convert this to a build matrix if you need coverage of multiple configuration types.
@@ -48,26 +48,26 @@ jobs:
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       # run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.INSTALLER_SOLUTION_FILE_PATH}}
-      run: "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\devenv.com\" .\\pow-miner-gpu-wingui-installer\\pow-miner-gpu-wingui-installer.sln /build Release" 
-      # /project .\\pow-miner-gpu-wingui-installer\\pow-miner-gpu-wingui-installer.vdproj /projectconfig Release
+      run: "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\devenv.com\" .\\TON-pow-miner-gpu-wingui-installer\\TON-pow-miner-gpu-wingui-installer.sln /build Release" 
+      # /project .\\TON-pow-miner-gpu-wingui-installer\\TON-pow-miner-gpu-wingui-installer.vdproj /projectconfig Release
       
     - name: Delete some sh**
-      run: FOR %%a IN (".\pow-miner-gpu-wingui\x64\Release\*") DO IF /i NOT "%%~nxa"=="pow-miner-gpu-wingui.exe" IF /i NOT "%%~nxa"=="msvcp140.dll" IF /i NOT "%%~nxa"=="IDI_ICON1.ico" DEL "%%a"   
+      run: FOR %%a IN (".\TON-pow-miner-gpu-wingui\x64\Release\*") DO IF /i NOT "%%~nxa"=="TON-pow-miner-gpu-wingui.exe" IF /i NOT "%%~nxa"=="msvcp140.dll" IF /i NOT "%%~nxa"=="IDI_ICON1.ico" DEL "%%a"   
     
     - name: Zip
       run: |
-        cd pow-miner-gpu-wingui\x64\Release\
+        cd TON-pow-miner-gpu-wingui\x64\Release\
         mkdir miners
-        7z a ..\..\..\artifacts_dir\portable-pow-miner-gpu-wingui-x86-64.zip .\
+        7z a ..\..\..\artifacts_dir\portable-TON-pow-miner-gpu-wingui-x86-64.zip .\
         
     - name: Copy installer msi
       run: |
-        cd pow-miner-gpu-wingui-installer\pow-miner-gpu-wingui-installer\Release\   
-        copy /Y ".\pow-miner-gpu-wingui.msi" "..\..\..\artifacts_dir\pow-miner-gpu-wingui-x86-64.msi"
+        cd TON-pow-miner-gpu-wingui-installer\TON-pow-miner-gpu-wingui-installer\Release\   
+        copy /Y ".\TON-pow-miner-gpu-wingui.msi" "..\..\..\artifacts_dir\TON-pow-miner-gpu-wingui-x86-64.msi"
         
     - name: Packing binary files to the GITHUB Release Tag
       uses: ncipollo/release-action@v1
       with:
           allowUpdates: true
-          artifacts: artifacts_dir\*pow-miner-gpu-wingui*
+          artifacts: artifacts_dir\*TON-pow-miner-gpu-wingui*
           token: ${{ secrets.GITHUB_TOKEN }}

@@ -24,7 +24,7 @@ void DeviceTab_MinerProc_stdoutNLCallBack_1(void* handle);
 
 void DeviceTab_MinerProc_processFinishCallBack(void* handle);
 
-namespace powminergpuwingui {
+namespace tonpowminergpuwingui {
 		 
 	/// <summary>
 	/// Summary for DeviceTab
@@ -762,9 +762,9 @@ private: std::string GetRandomGiver(void) {
 
 	int qnt = strings.size();
 
-	if (powminergpuwingui::DeviceTab::srand_exec_flag == 0) {
+	if (tonpowminergpuwingui::DeviceTab::srand_exec_flag == 0) {
 		srand(time(NULL));
-		powminergpuwingui::DeviceTab::srand_exec_flag = 1;
+		tonpowminergpuwingui::DeviceTab::srand_exec_flag = 1;
 	}
 
 	int rand_num = rand() % qnt;
@@ -853,7 +853,7 @@ private: System::Void textBox1_TextChanged(System::Object^  sender, System::Even
 }
 private: System::Void FoundsShowAllButton_Click(System::Object^  sender, System::EventArgs^  e) {
 
-	powminergpuwingui::FoundsAllForm FoundsAllForm_0;
+	tonpowminergpuwingui::FoundsAllForm FoundsAllForm_0;
 
 	FoundsAllForm_0.GetFoundsAllTextBox()->Text = "";
 

@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:pow-miner-gpu-wingui-installer"
+"ProjectName" = "8:TON-pow-miner-gpu-wingui-installer"
 "LanguageId" = "3:1033"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1033"
@@ -135,7 +135,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\pow-miner-gpu-wingui-installer.msi"
+        "OutputFilename" = "8:Debug\\TON-pow-miner-gpu-wingui-installer.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -152,6 +152,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -159,7 +167,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\pow-miner-gpu-wingui.msi"
+        "OutputFilename" = "8:Release\\TON-pow-miner-gpu-wingui.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -216,7 +224,7 @@
         {
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_25661F7C3B8846C08EF942A1D60F5E44"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\vcruntime140_1.dll"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\vcruntime140_1.dll"
             "TargetName" = "8:vcruntime140_1.dll"
             "Tag" = "8:"
             "Folder" = "8:_D10A60A780D24279A002329EE60541C4"
@@ -236,7 +244,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2E57A4E655174CAF8E93177A4E181968"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\tools\\unzip.exe"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\tools\\unzip.exe"
             "TargetName" = "8:unzip.exe"
             "Tag" = "8:"
             "Folder" = "8:_0469D58C438E4CCD91B7A60C18FA012D"
@@ -256,7 +264,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_32D86F8FB8FE47EBAD56D344C8685E8F"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\pow-miner-gpu-wingui\\app.ico"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\TON-pow-miner-gpu-wingui\\app.ico"
             "TargetName" = "8:app.ico"
             "Tag" = "8:"
             "Folder" = "8:_9FD8E1AEE2434863BAAE8D14A7718B46"
@@ -276,18 +284,18 @@
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_35B3D7A58959412EA3D7C854C9130234"
             {
-            "AssemblyRegister" = "3:1"
+            "AssemblyRegister" = "3:2"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:pow-miner-gpu-wingui, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64"
+            "AssemblyAsmDisplayName" = "8:TON-pow-miner-gpu-wingui, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
                     "_35B3D7A58959412EA3D7C854C9130234"
                     {
-                    "Name" = "8:pow-miner-gpu-wingui.exe"
+                    "Name" = "8:TON-pow-miner-gpu-wingui.exe"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\pow-miner-gpu-wingui.exe"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\TON-pow-miner-gpu-wingui.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9FD8E1AEE2434863BAAE8D14A7718B46"
@@ -307,7 +315,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_40879D54E4F94D19BCF3FE09B2E2A77F"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\config\\pow-givers.txt"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\config\\pow-givers.txt"
             "TargetName" = "8:pow-givers.txt"
             "Tag" = "8:"
             "Folder" = "8:_D98ED1D5803241DAA058F163D682E7B2"
@@ -327,7 +335,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4E7CB6A9026B4F62A7A65C83A184148C"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\tonlib-cuda-cli.exe"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\tonlib-cuda-cli.exe"
             "TargetName" = "8:tonlib-cuda-cli.exe"
             "Tag" = "8:"
             "Folder" = "8:_D10A60A780D24279A002329EE60541C4"
@@ -347,7 +355,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8DF9C53891314AE3B46C84849E63F463"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\pow-miner-opencl.exe"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\pow-miner-opencl.exe"
             "TargetName" = "8:pow-miner-opencl.exe"
             "Tag" = "8:"
             "Folder" = "8:_D10A60A780D24279A002329EE60541C4"
@@ -367,7 +375,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_92ABC0BE3E62407EB0DC3A48EFFA657A"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\tonlib-opencl-cli.exe"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\tonlib-opencl-cli.exe"
             "TargetName" = "8:tonlib-opencl-cli.exe"
             "Tag" = "8:"
             "Folder" = "8:_D10A60A780D24279A002329EE60541C4"
@@ -387,7 +395,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9C45296473464AD6A03CBA250CC73095"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\libcrypto-1_1-x64.dll"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\libcrypto-1_1-x64.dll"
             "TargetName" = "8:libcrypto-1_1-x64.dll"
             "Tag" = "8:"
             "Folder" = "8:_D10A60A780D24279A002329EE60541C4"
@@ -407,7 +415,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A4CD616270E249868002E1178F78CD0B"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\lite-client.exe"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\lite-client.exe"
             "TargetName" = "8:lite-client.exe"
             "Tag" = "8:"
             "Folder" = "8:_D10A60A780D24279A002329EE60541C4"
@@ -427,7 +435,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A675E6156DDA4D1E9A7D5B5739CEC491"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\vcruntime140.dll"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\vcruntime140.dll"
             "TargetName" = "8:vcruntime140.dll"
             "Tag" = "8:"
             "Folder" = "8:_D10A60A780D24279A002329EE60541C4"
@@ -447,7 +455,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ABC73A1C8A0F43A884F1594847690F70"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\pow-miner-cuda.exe"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\pow-miner-cuda.exe"
             "TargetName" = "8:pow-miner-cuda.exe"
             "Tag" = "8:"
             "Folder" = "8:_D10A60A780D24279A002329EE60541C4"
@@ -467,7 +475,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B5B137E80C8C4C7088F2B7E114E07349"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\config\\global.config.json"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\config\\global.config.json"
             "TargetName" = "8:global.config.json"
             "Tag" = "8:"
             "Folder" = "8:_D98ED1D5803241DAA058F163D682E7B2"
@@ -487,7 +495,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C402BF39271047FA88D94D3C4C273226"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\msvcp140.dll"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\msvcp140.dll"
             "TargetName" = "8:msvcp140.dll"
             "Tag" = "8:"
             "Folder" = "8:_9FD8E1AEE2434863BAAE8D14A7718B46"
@@ -507,7 +515,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D6A4277203414086993A1C22B56B37A2"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\tools\\wget\\wget.exe"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\tools\\wget\\wget.exe"
             "TargetName" = "8:wget.exe"
             "Tag" = "8:"
             "Folder" = "8:_F862F74E3CAC4794AF481A44D1DAE211"
@@ -527,7 +535,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F738434945A44C27994E9E9196B775D9"
             {
-            "SourcePath" = "8:..\\..\\pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\OpenCL.dll"
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\tools\\minertools\\OpenCL.dll"
             "TargetName" = "8:OpenCL.dll"
             "Tag" = "8:"
             "Folder" = "8:_D10A60A780D24279A002329EE60541C4"
@@ -560,6 +568,84 @@
             "Property" = "8:StartMenuFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_FD1489E638DA441084F1D57189FAF14B"
+                    {
+                    "Name" = "8:TON Foundation"
+                    "AlwaysCreate" = "11:TRUE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_B083220D75434973A5AD36915AA4CCCD"
+                        "Folders"
+                        {
+                        }
+                    }
+                }
+            }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_6D380532E39D42AF9356F97B2B47F5CC"
+            {
+            "Name" = "8:#1919"
+            "AlwaysCreate" = "11:TRUE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:ProgramMenuFolder"
+                "Folders"
+                {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_9B230A78DF26449B92A8F73309E57152"
+                    {
+                    "Name" = "8:TON Foundation"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_9B80D66F83364624AEFDBEAD7184E265"
+                        "Folders"
+                        {
+                        }
+                    }
+                }
+            }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_74893CED169E45B8941EA4B04A06F4F1"
+            {
+            "Name" = "8:#1916"
+            "AlwaysCreate" = "11:TRUE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:DesktopFolder"
+                "Folders"
+                {
+                }
+            }
+            "{994432C3-9487-495D-8656-3E829A8DBDDE}:_90E37B5757E6493C8CFD31D5513A572A"
+            {
+            "DefaultLocation" = "8:C:\\Users\\USERNAME\\Desktop"
+            "Name" = "8:RealUserDesktop"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:NEWPROPERTY1"
+                "Folders"
+                {
+                }
+            }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_99EA096B71494EDBBE20993F061742C9"
+            {
+            "Name" = "8:#1918"
+            "AlwaysCreate" = "11:TRUE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:PersonalFolder"
+                "Folders"
+                {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_2093CC6AA8B24E679ABA987580461EE0"
+                    {
+                    "Name" = "8:Desktop"
+                    "AlwaysCreate" = "11:TRUE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_ECDB3317383144A8AB6F3E72FBBCB60D"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_9FD8E1AEE2434863BAAE8D14A7718B46"
@@ -666,25 +752,25 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:pow-miner-gpu-wingui"
+        "ProductName" = "8:TON-pow-miner-gpu-wingui"
         "ProductCode" = "8:{E7CD4D54-22A7-455E-AED3-1DB715C40F4C}"
-        "PackageCode" = "8:{4786B191-0E23-4D72-A462-6AD0C07CF407}"
+        "PackageCode" = "8:{10C73B96-6EF0-4DB3-AFFD-AC8520DCAAFB}"
         "UpgradeCode" = "8:{8756F4A2-60AE-4797-B0A0-6333461DCDD6}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:TRUE"
+        "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:0.1.0"
-        "Manufacturer" = "8:TON Community"
+        "Manufacturer" = "8:TON Foundation"
         "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:https://github.com/sunnyhellious/pow-miner-gpu-wingui"
-        "Title" = "8:pow-miner-gpu-wingui"
-        "Subject" = "8:"
-        "ARPCONTACT" = "8:sunnyhellious"
+        "ARPHELPLINK" = "8:https://github.com/sunnyhellious/TON-pow-miner-gpu-wingui"
+        "Title" = "8:TON-pow-miner-gpu-wingui"
+        "Subject" = "8:TON Foundation official toncoin miner with GUI for Windows OS."
+        "ARPCONTACT" = "8:TON Foundation"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
-        "ARPURLINFOABOUT" = "8:"
+        "ARPURLINFOABOUT" = "8:https://ton.org/"
         "ARPPRODUCTICON" = "8:_32D86F8FB8FE47EBAD56D344C8685E8F"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
@@ -788,17 +874,73 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_76756C496D8F41AC895FDF327630DB68"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_0D0BC0E1E1F04A618A5F3B1878D746C1"
             {
-            "Name" = "8:pow-miner-gpu-wingui-folder"
+            "Name" = "8:TON-pow-miner-gpu-wingui"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_9FD8E1AEE2434863BAAE8D14A7718B46"
-            "Folder" = "8:_0123AA616870471489B0B68D0C42D195"
-            "WorkingFolder" = "8:_0123AA616870471489B0B68D0C42D195"
+            "Target" = "8:_35B3D7A58959412EA3D7C854C9130234"
+            "Folder" = "8:_FD1489E638DA441084F1D57189FAF14B"
+            "WorkingFolder" = "8:_9FD8E1AEE2434863BAAE8D14A7718B46"
+            "Icon" = "8:_32D86F8FB8FE47EBAD56D344C8685E8F"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_1B7BCAAB125344F4A0A8C98B048E81C5"
+            {
+            "Name" = "8:TON-pow-miner-gpu-wingui"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_35B3D7A58959412EA3D7C854C9130234"
+            "Folder" = "8:_74893CED169E45B8941EA4B04A06F4F1"
+            "WorkingFolder" = "8:_9FD8E1AEE2434863BAAE8D14A7718B46"
+            "Icon" = "8:_32D86F8FB8FE47EBAD56D344C8685E8F"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5CEC0AC46AB74C77B86EC10BE77B9C9A"
+            {
+            "Name" = "8:TON-pow-miner-gpu-wingui"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_35B3D7A58959412EA3D7C854C9130234"
+            "Folder" = "8:_9B230A78DF26449B92A8F73309E57152"
+            "WorkingFolder" = "8:_9FD8E1AEE2434863BAAE8D14A7718B46"
+            "Icon" = "8:_32D86F8FB8FE47EBAD56D344C8685E8F"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_BDF8E3B169214544A71910E03D71E0C3"
+            {
+            "Name" = "8:TON-pow-miner-gpu-wingui"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_35B3D7A58959412EA3D7C854C9130234"
+            "Folder" = "8:_2093CC6AA8B24E679ABA987580461EE0"
+            "WorkingFolder" = "8:_9FD8E1AEE2434863BAAE8D14A7718B46"
+            "Icon" = "8:_32D86F8FB8FE47EBAD56D344C8685E8F"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C335CE0D905A49BD94879CA94125711C"
+            {
+            "Name" = "8:TON-pow-miner-gpu-wingui"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_35B3D7A58959412EA3D7C854C9130234"
+            "Folder" = "8:_90E37B5757E6493C8CFD31D5513A572A"
+            "WorkingFolder" = "8:_9FD8E1AEE2434863BAAE8D14A7718B46"
             "Icon" = "8:_32D86F8FB8FE47EBAD56D344C8685E8F"
             "Feature" = "8:"
             }

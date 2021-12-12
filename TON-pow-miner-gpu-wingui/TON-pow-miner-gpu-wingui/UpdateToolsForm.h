@@ -2,7 +2,7 @@
 
 #include "AppSysSubProcess.h"
 
-namespace powminergpuwingui {
+namespace tonpowminergpuwingui {
 
 	using namespace System;
 	using namespace System::ComponentModel;

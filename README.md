@@ -3,6 +3,9 @@
 TON wallet address for donations: <br />
 __EQAvRnuckR42aEE29_WCDCTOwEci1ZKo8a5ul4ncYWaqxA2q__
 
+Description: <br />
+__TON Foundation official toncoin miner__ with GUI for Windows OS
+
 Install prerequisites before start:
 1. __Microsoft .NET Framework 4 (offline installator)__ - https://www.microsoft.com/ru-ru/download/details.aspx?id=17718
 

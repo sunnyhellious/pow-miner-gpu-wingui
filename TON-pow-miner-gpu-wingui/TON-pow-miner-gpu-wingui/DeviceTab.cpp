@@ -2,7 +2,7 @@
 #include "MainForm.h"
 #include "DeviceTab.h"
 
-using namespace powminergpuwingui;
+using namespace tonpowminergpuwingui;
 
 void DeviceTab_MinerProc_stdoutNLCallBack(void* handle) {
 

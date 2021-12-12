@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by pow-miner-gpu-wingui.rc
+// Used by TON-pow-miner-gpu-wingui.rc
 //
 #define IDR_EXE1                        101
 #define IDI_ICON1                       102
