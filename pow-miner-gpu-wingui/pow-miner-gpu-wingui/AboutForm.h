@@ -62,8 +62,7 @@ namespace powminergpuwingui {
 			this->textBox1->ReadOnly = true;
 			this->textBox1->Size = System::Drawing::Size(317, 160);
 			this->textBox1->TabIndex = 0;
-			this->textBox1->Text = L"Name: pow-miner-gpu-wingui\r\nVersion: 0.1.0\r\nWebSite: https://github.com/tontechio"
-				L"/pow-miner-gpu\r\n";
+			this->textBox1->Text = L"TON Foundation official toncoin miner\r\nProgram: pow-miner-gpu-wingui\r\nVersion: 0.1.0\r\nMiner website: https://github.com/tontechio\r\nGUI website: https://github.com/sunnyhellious/pow-miner-gpu-wingui";
 			this->textBox1->TextChanged += gcnew System::EventHandler(this, &AboutForm::textBox1_TextChanged);
 			// 
 			// AboutForm
