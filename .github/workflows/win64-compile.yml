@@ -59,21 +59,16 @@ jobs:
       run: |
         cd pow-miner-gpu-wingui\x64\Release\    
         mkdir miners
-        7z a ..\..\..\artifacts_dir\pow-miner-gpu-wingui-x86-64.zip .\
+        7z a ..\..\..\artifacts_dir\portable-pow-miner-gpu-wingui-x86-64.zip .\
         
-    - name: Zip exe installer
+    - name: Copy installer msi
       run: |
         cd pow-miner-gpu-wingui-installer\pow-miner-gpu-wingui-installer\Release\   
-        7z a ..\..\..\artifacts_dir\pow-miner-gpu-wingui-installer-exe-x86-64.zip .\setup.exe
+        copy /Y ".\pow-miner-gpu-wingui.msi" "..\..\..\artifacts_dir\pow-miner-gpu-wingui-x86-64.msi"
         
-    - name: Zip msi installer
-      run: |
-        cd pow-miner-gpu-wingui-installer\pow-miner-gpu-wingui-installer\Release\   
-        7z a ..\..\..\artifacts_dir\pow-miner-gpu-wingui-installer-msi-x86-64.zip .\pow-miner-gpu-wingui.msi
-            
     - name: Packing binary files to the GITHUB Release Tag
       uses: ncipollo/release-action@v1
       with:
           allowUpdates: true
-          artifacts: artifacts_dir\pow-miner-gpu-wingui*
+          artifacts: artifacts_dir\*pow-miner-gpu-wingui*
           token: ${{ secrets.GITHUB_TOKEN }}
