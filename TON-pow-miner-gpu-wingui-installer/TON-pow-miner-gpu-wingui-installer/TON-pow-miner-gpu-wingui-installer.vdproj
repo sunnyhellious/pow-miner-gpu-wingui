@@ -93,6 +93,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_ACA484BB9D8A48E7B059BD42A2103E42"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_B5B137E80C8C4C7088F2B7E114E07349"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -106,6 +112,12 @@
         "Entry"
         {
         "MsmKey" = "8:_C8E80EF934EA40888041040B90F7396B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CFEA2104F0254EF7AA054DA6198715A4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -473,6 +485,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ACA484BB9D8A48E7B059BD42A2103E42"
+            {
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\vcruntime140.dll"
+            "TargetName" = "8:vcruntime140.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_9FD8E1AEE2434863BAAE8D14A7718B46"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B5B137E80C8C4C7088F2B7E114E07349"
             {
             "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\config\\global.config.json"
@@ -497,6 +529,26 @@
             {
             "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\msvcp140.dll"
             "TargetName" = "8:msvcp140.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_9FD8E1AEE2434863BAAE8D14A7718B46"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CFEA2104F0254EF7AA054DA6198715A4"
+            {
+            "SourcePath" = "8:..\\..\\TON-pow-miner-gpu-wingui\\x64\\Release\\vcruntime140_1.dll"
+            "TargetName" = "8:vcruntime140_1.dll"
             "Tag" = "8:"
             "Folder" = "8:_9FD8E1AEE2434863BAAE8D14A7718B46"
             "Condition" = "8:"

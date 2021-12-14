@@ -202,7 +202,7 @@ namespace tonpowminergpuwingui {
 			if(errors_exists)
 				this->UpdateToolsTextBox->AppendText("\r\n\tWE HAD PROBLEMS, PLEASE REVIEW THIS LOG AND CHECK THE INTERNET\r\n");
 			else
-				this->UpdateToolsTextBox->AppendText("\r\n\tEVERYTHING SEEMS TO BE ALRIGHT\r\n");
+				this->UpdateToolsTextBox->AppendText("\r\n\tEVERYTHING SEEMS TO BE FINE\r\n");
 
 			
 			
